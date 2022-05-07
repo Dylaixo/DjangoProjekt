@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}FindTravel | {{ attraction.name }}{% endblock %}</title>
+</head>
+<body>
+
+{% block content %}
+    <div>
+        <h2>{{ attraction.name }}</h2>
+        <h3>{{ attraction.city }}</h3>
+        <img src="/{{attraction.image}}">
+        <p>Kategoria: {{ attraction.category }}</p>
+        <p>Szacowany czas: {{ attraction.time }}</p>
+        <p>Opis: {{ attraction.desc }}</p>
+        <a href="{{ attraction.id }}/add">Dodaj do koszyka</a>
+    </div>
+{% endblock %}
+</body>
+</html>

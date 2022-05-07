@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+            <link rel="stylesheet" href="/templates/main/style.css">
+    <title>{% block title %}FindTravel | Wybierz Miasto{% endblock %}</title>
+</head>
+<body>
+{% block content %}
+{% for city in city_list %}
+    <div>
+        <a href="attractions/{{city.name}}">
+        <h2>{{ city.name }}</h2>
+        <img src={{ city.image }}>
+        </a>
+    </div>
+
+{% endfor %}
+{% endblock %}
+</body>
+</html>

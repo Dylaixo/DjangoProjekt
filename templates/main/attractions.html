@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/templates/main/style.css">
+<title >{% block title %}FindTravel | Wybierz Atrakcje{% endblock %}</title>
+</head>
+<body>
+{% block content %}
+        <h1>Atrakcje</h1>
+{% for attraction in attraction_list %}
+    {% if attraction.city.name == city  %}
+
+    <div>
+
+        <a href="single_attraction/{{attraction.id}}">
+        <h2>{{ attraction.name }}</h2>
+        <img src="/{{attraction.image}}">
+        </a>
+    </div>
+    {% endif%}
+{% endfor %}
+{% endblock %}
+</body>
+</html>
