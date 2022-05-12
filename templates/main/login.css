@@ -27,3 +27,14 @@ button{
     font-size: 20px;
         font-family: 'Josefin Sans', sans-serif;
 }
+.acc{
+    font-size: 35px;
+    text-align: center;
+    margin-top: 15px;
+}
+.acc a{
+    margin-left: 10px;
+}
+a:visited{
+    color: black;
+}

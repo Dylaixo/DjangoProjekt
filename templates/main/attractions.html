@@ -3,24 +3,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/templates/main/style.css">
+    {% block style %}<link rel="stylesheet" href="/templates/main/attractions.css">{% endblock %}
 <title >{% block title %}FindTravel | Wybierz Atrakcje{% endblock %}</title>
 </head>
 <body>
 {% block content %}
-        <h1>Atrakcje</h1>
+       <div class="header">
+    <h1 class="header-title">Atrakcje</h1>
+    <div class="filtr">
+        <h2>Filtry:</h2><br>
+        <button id="all">Wszystkie</button>
+        <button id="Sakralne">Sakralne</button>
+        <button id="Pomniki">Pomniki</button>
+        <button id="Muzea">Muzea</button>
+        <button id="Zabytki">Zabytki</button>
+    </div>
+</div>
+    <div class="container">
 {% for attraction in attraction_list %}
     {% if attraction.city.name == city  %}
 
-    <div>
-
+    <div class="{{ attraction.category }}">
         <a href="single_attraction/{{attraction.id}}">
-        <h2>{{ attraction.name }}</h2>
         <img src="/{{attraction.image}}">
+            <span>{{ attraction.name }}</span>
         </a>
     </div>
+
     {% endif%}
 {% endfor %}
+    </div>
+    <script src="/templates/main/filtr.js/"></script>
 {% endblock %}
+
 </body>
 </html>

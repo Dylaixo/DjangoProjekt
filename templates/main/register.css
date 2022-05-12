@@ -1,0 +1,41 @@
+
+.helptext{
+    display: block;
+}
+form{
+    text-align: center;
+    margin: 50px;
+    font-size: 30px;
+
+}
+ul li{
+    list-style-type: none;
+
+}
+button{
+    width: 150px;
+    height: 40px;
+    font-size: 20px;
+        font-family: 'Josefin Sans', sans-serif;
+}
+.errorlist{
+    display: none;
+}
+form p{
+    padding-top: 10px;
+}
+form label{
+    font-size:30px;
+        font-family: 'Josefin Sans', sans-serif;
+}
+input{
+    width: 200px;
+    height: 30px;
+    font-size:20px ;
+        font-family: 'Josefin Sans', sans-serif;
+}
+.error{
+    text-align: center;
+    font-size:40px ;
+    color: red;
+}

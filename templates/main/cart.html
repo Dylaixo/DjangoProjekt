@@ -10,6 +10,7 @@
     {% for attraction in attraction_list %}
         <h1>{{ attraction.name }}</h1>
         <img src="/{{attraction.image}}">
+        <p>Miasto: {{ attraction.city }}</p>
         <p>Szacowany czas: {{ attraction.time }} min</p>
     {% endfor %}
 {% endblock %}

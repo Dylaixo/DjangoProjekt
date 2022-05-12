@@ -12,10 +12,11 @@
 </head>
 <body>
 <nav>
-    <a href="#"></a>
+<img class="logo" src="/templates/main/img/icone.png">
     <a href="#"></a>
     <a href="/">Strona główna</a>
     <a href="/attractions">Atrakcje</a>
+    <a href="/about">Nasz zespół</a>
             {% if user.is_authenticated %}
             <a href="/logout/">Wyloguj sie</a>
             {% else %}
@@ -29,25 +30,7 @@
     {% endblock %}
 </div>
 <footer>
-    <h1><span>Nasz zespół:</span></h1>
-    <div class="authors">
-        <div class="author">
-        <img class="portret" src="/templates/main/img/img1.jpg">
-            <blockquote>Imie i nazwisko</blockquote>
-        </div>
-        <div class="author">
-        <img class="portret" src="/templates/main/img/img1.jpg">
-            <blockquote>Imie i nazwisko</blockquote>
-        </div>
-        <div class="author">
-        <img class="portret" src="/templates/main/img/img1.jpg">
-            <blockquote>Imie i nazwisko</blockquote>
-        </div>
-        <div class="author">
-        <img class="portret" src="/templates/main/img/img1.jpg">
-            <blockquote>Imie i nazwisko</blockquote>
-        </div>
-    </div>
+    <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script>, FindTravel</p>
 </footer>
 </body>
 </html>
