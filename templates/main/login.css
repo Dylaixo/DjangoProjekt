@@ -15,6 +15,10 @@ label{
 .author{
     display: flex;
 }
+.errorlist{
+    color: red;
+    list-style: none;
+}
 input{
     width: 200px;
     height: 30px;

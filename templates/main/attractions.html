@@ -24,7 +24,7 @@
     {% if attraction.city.name == city  %}
 
     <div class="{{ attraction.category }}">
-        <a href="single_attraction/{{attraction.id}}">
+        <a class="attract" href="single_attraction/{{attraction.id}}">
         <img src="/{{attraction.image}}">
             <span>{{ attraction.name }}</span>
         </a>

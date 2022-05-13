@@ -44,7 +44,7 @@ a:hover{
     font-size: 35px;
     transition: 0.75s;
 }
-a:hover img{
+.attract:hover img{
     box-shadow: 5px 4px 5px 5px grey;
 }
 span{

@@ -3,11 +3,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+        {% block style %}<link rel="stylesheet" href="/templates/main/about.css">{% endblock %}
+    <title >{% block title %}FindTravel | O nas{% endblock %}</title>
     <title>Title</title>
 </head>
 <body>
 {% block content %}
-    <h1>Zespół</h1>
+    <div class="container">
+    <div>
+            <h1>Grzegorz Niewierowski</h1>
+            <img src="/templates/main/img/img1.jpg">
+            <blockquote class="desc">
+                Podczas tworzenia odpowiadał za wykonanie</br> całego frontendu.
+                <a href="#" target="_blank">Github</a>
+            </blockquote>
+    </div>
+    <div>
+            <h1>Mateusz Gryko</h1>
+            <img src="/templates/main/img/img3.jpg">
+            <blockquote class="desc">
+                Podczas tworzenia odpowiadał za wykonanie</br> całego frontendu.
+                <a href="#" target="_blank">Github</a>
+            </blockquote>
+    </div>
+    <div>
+            <h1>Filip Ryciuk</h1>
+            <img src="/templates/main/img/img2.jpg">
+            <blockquote class="desc">
+                Podczas tworzenia odpowiadał za wykonanie</br> całego frontendu.
+                <a href="#" target="_blank">Github</a>
+            </blockquote>
+    </div>
+    <div>
+            <h1>Marcin Łogwinowicz</h1>
+            <img src="/templates/main/img/img1.jpg">
+            <blockquote class="desc">
+                Podczas tworzenia odpowiadał za wykonanie</br> całego frontendu.
+                <a href="https://github.com/Dylaixo" target="_blank">Github</a>
+            </blockquote>
+    </div>
+    </div>
 {% endblock %}
 </body>
 </html>
