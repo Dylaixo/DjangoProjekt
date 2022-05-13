@@ -1,0 +1,46 @@
+
+.name{
+    margin: 30px 0 10px 0;
+    font-size: 60px;
+    text-align: center;
+    font-weight: bold;
+}
+.city{
+    text-align: center;
+    font-size: 30px;
+}
+.desc{
+    display: block;
+}
+.photo
+{
+    width: 25%;
+    height:400px;
+    margin: 0 50px 0 40px;
+    border-radius: 5px;
+        box-shadow: 5px 4px 5px 5px grey;
+}
+.attraction{
+    display: flex;
+}
+.about{
+    display: block;
+    font-size: 35px;
+    width: 600px;
+}
+.add, .add:visited{
+    cursor: copy;
+    margin-top: auto;
+    color: black;
+    display: flex;
+    font-size: 25px;;
+}
+.add img{
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+
+}
+.cat{
+
+}
