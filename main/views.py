@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Category, Cart, Attractions, City
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -30,9 +31,8 @@ def single_attraction(request, id):
     return render(request, "main/single_attraction.html", context)
 
 
+@login_required()
 def add_attraction(request, id):
-    if not request.user.is_authenticated:
-        return redirect('/login/')
     user = User.objects.get(id=request.user.id)
     queryset = Cart.objects.filter(user=user, completed=False)
     attraction = Attractions.objects.filter(id=id)
@@ -45,9 +45,8 @@ def add_attraction(request, id):
     return redirect(f"/attractions/single_attraction/{id}")
 
 
+@login_required()
 def cart(request):
-    if not request.user.is_authenticated:
-        return redirect('/login/')
     try:
         cart = Cart.objects.get(user=request.user, completed=False)
     except Cart.DoesNotExist:
@@ -61,3 +60,17 @@ def cart(request):
 
 def about(request):
     return render(request, "main/about.html")
+
+
+@login_required
+def profile(request):
+    try:
+        cart = Cart.objects.get(user=request.user, completed=False)
+        attractions_list = list(cart.attractions.all())
+    except Cart.DoesNotExist:
+        attractions_list = {}
+    try:
+        cart_list = Cart.objects.filter(user=request.user, completed=True)
+    except Cart.DoesNotExist:
+        attractions_list = {}
+    return render(request, "main/profile.html", {"attraction_list": attractions_list, "cart_list": cart_list})

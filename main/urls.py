@@ -12,5 +12,6 @@ urlpatterns = [
     path('attractions/single_attraction/<int:id>', views.single_attraction, name='single_attraction'),
     path('attractions/single_attraction/<int:id>/add', views.add_attraction, name='add_attraction'),
     path('cart', views.cart, name='cart'),
-    path('about', views.about, name='about')
+    path('about', views.about, name='about'),
+    path('profile', views.profile, name='profile')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
