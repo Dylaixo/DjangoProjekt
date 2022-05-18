@@ -20,28 +20,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-($$tin+j^@t^&l!r!g&vk0xpf-2mcq4du%cbs%i%^0#bi0$5mi'
+SECRET_KEY = 'django-insecure-e$7n^*$-i2r=-#*_25wu8g9*1nc*$pwr$@3!fxe_ow3edz^fk!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = [
-	'0.0.0.0',
-	'127.0.0.1',
-	'192.168.0.100',
-	'91.145.130.184'
-
+    '0.0.0.0',
+    '127.0.0.1'
 ]
-
-LOGOUT_REDIRECT_URL = '/attractions'
-LOGIN_REDIRECT_URL = '/attractions'
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'main.apps.MainConfig',
-    'register.apps.RegisterConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -65,7 +57,7 @@ ROOT_URLCONF = 'djangoProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -114,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'pl'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
@@ -132,5 +124,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-LOGIN_URL = '/login/'
