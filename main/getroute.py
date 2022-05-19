@@ -1,7 +1,7 @@
 import requests
-import json
 import polyline
-import folium
+from python_tsp.exact import solve_tsp_dynamic_programming
+import numpy as np
 
 
 def get_route(pickup_lon, pickup_lat, dropoff_lon, dropoff_lat):
@@ -25,3 +25,19 @@ def get_route(pickup_lon, pickup_lat, dropoff_lon, dropoff_lat):
            }
 
     return out
+
+
+def shortest_path(attractions_list):
+    y = len(attractions_list)
+    routes = np.zeros((y, y))
+    for i in range(0, len(attractions_list)):
+        for j in range(i, len(attractions_list)):
+            route = get_route(attractions_list[j].long, attractions_list[j].lat,
+                                       attractions_list[i].long, attractions_list[i].lat)
+            routes[j][i] = routes[i][j] = route['duration']
+    permutation, distance = solve_tsp_dynamic_programming(routes)
+    print(permutation)
+    print(distance)
+    return permutation, distance
+
+

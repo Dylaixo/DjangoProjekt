@@ -64,16 +64,18 @@ def cart(request):
                                  attractions_list[0].long],
                        zoom_start=10)
         m.add_to(figure)
-        duration = 0
-        for i in range(1, len(attractions_list)):
+        permutation, distance = getroute.shortest_path(attractions_list)
+        tmp_list = []
+        for i in permutation:
+            tmp_list.append(attractions_list[i])
+        for i in range(1, len(tmp_list)):
             route = getroute.get_route(attractions_list[i-1].long, attractions_list[i-1].lat, attractions_list[i].long,
                                        attractions_list[i].lat)
             folium.PolyLine(route['route'], weight=8, color='blue', opacity=0.6).add_to(m)
             folium.Marker(location=route['start_point'], icon=folium.Icon(icon='play', color='green')).add_to(m)
             folium.Marker(location=route['end_point'], icon=folium.Icon(icon='stop', color='red')).add_to(m)
             figure.render()
-            duration = duration + route['duration']
-        return render(request, "main/cart.html", {"attraction_list": attractions_list, "map": figure, "duration": duration, "del": True})
+        return render(request, "main/cart.html", {"attraction_list": attractions_list, "map": figure, "distance": distance, "del": True})
     else:
         return render(request, "main/cart_empty.html", {})
 
