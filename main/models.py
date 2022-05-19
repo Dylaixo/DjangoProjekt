@@ -24,6 +24,9 @@ class Attractions(models.Model):
     image = models.ImageField(upload_to=f'attractions_images/', blank=True)
     desc = models.TextField()
     city = models.ForeignKey(City, on_delete=models.CASCADE)
+    lat = models.FloatField(default=0)
+    long = models.FloatField(default=0)
+
 
     def __str__(self):
         return self.name

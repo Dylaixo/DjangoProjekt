@@ -1,18 +1,24 @@
-{% extends 'main/base.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}FindTravel | Koszyk{% endblock %}</title>
+    <title>FindTravel | Koszyk</title>
+    {{map.header.render|safe}}
 </head>
 <body>
-{% block content %}
+    {% if map %}
+
+  	{{map.html.render|safe}}
+  	<script>
+    	{{map.script.render|safe}}
+  	</script>
+	{% endif %}
+    <h1>Czas:{{ duration }} sec</h1>
     {% for attraction in attraction_list %}
         <h1>{{ attraction.name }}</h1>
         <img src="/{{attraction.image}}">
         <p>Miasto: {{ attraction.city }}</p>
         <p>Szacowany czas: {{ attraction.time }} min</p>
     {% endfor %}
-{% endblock %}
 </body>
 </html>
