@@ -14,6 +14,11 @@
   	</script>
 	{% endif %}
     <h1>Czas:{{ duration }} sec</h1>
+    {% if del %}
+    <form action="#" method="get">
+        <input style="height: 50px; width: 200px" type="submit" class="btn" value="Zakoncz" name="clicked">
+    </form>
+    {% endif %}
     {% for attraction in attraction_list %}
         <h1>{{ attraction.name }}</h1>
         <img src="/{{attraction.image}}">

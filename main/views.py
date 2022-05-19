@@ -49,6 +49,10 @@ def add_attraction(request, id):
 
 @login_required()
 def cart(request):
+    if request.GET.get('clicked'):
+        cart = Cart.objects.get(user=request.user, completed=False)
+        cart.completed = True
+        cart.save()
     try:
         cart = Cart.objects.get(user=request.user, completed=False)
     except Cart.DoesNotExist:
@@ -69,9 +73,30 @@ def cart(request):
             folium.Marker(location=route['end_point'], icon=folium.Icon(icon='stop', color='red')).add_to(m)
             figure.render()
             duration = duration + route['duration']
-        return render(request, "main/cart.html", {"attraction_list": attractions_list, "map": figure, "duration": duration})
+        return render(request, "main/cart.html", {"attraction_list": attractions_list, "map": figure, "duration": duration, "del": True})
     else:
         return render(request, "main/cart_empty.html", {})
+
+
+def cart_show(request, id):
+    cart = Cart.objects.get(id=id)
+    attractions_list = list(cart.attractions.all())
+    figure = folium.Figure()
+    m = folium.Map(location=[attractions_list[0].lat,
+                             attractions_list[0].long],
+                   zoom_start=10)
+    m.add_to(figure)
+    duration = 0
+    for i in range(1, len(attractions_list)):
+        route = getroute.get_route(attractions_list[i - 1].long, attractions_list[i - 1].lat, attractions_list[i].long,
+                                   attractions_list[i].lat)
+        folium.PolyLine(route['route'], weight=8, color='blue', opacity=0.6).add_to(m)
+        folium.Marker(location=route['start_point'], icon=folium.Icon(icon='play', color='green')).add_to(m)
+        folium.Marker(location=route['end_point'], icon=folium.Icon(icon='stop', color='red')).add_to(m)
+        figure.render()
+        duration = duration + route['duration']
+    return render(request, "main/cart.html",
+                  {"attraction_list": attractions_list, "map": figure, "duration": duration, "del": False})
 
 
 def about(request):
