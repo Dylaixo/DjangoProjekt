@@ -1,0 +1,45 @@
+*{
+    box-sizing: unset !important;
+    -moz-box-sizing: unset !important;
+    -webkit-box-sizing: unset !important;
+}
+.title{
+    text-align: center;
+    display: block;
+}
+[id^=map]{
+    width: 600px !important;
+    height:600px !important;
+    border: 2px solid black;
+    margin: 80px auto 0 auto !important;
+}
+.loged{
+    padding-top: 5px;
+}
+body{
+    line-height: unset;
+}
+img{
+    vertical-align: unset !important;
+}
+nav{
+    position: unset;
+}
+.content{
+    display: flex;
+    margin-bottom: 50px;
+}
+.map{
+
+    width: 50%;
+    text-align: center;
+}
+.desc{
+    width: 50%;
+}
+body{
+    padding-bottom: 50px;
+}
+footer{
+    bottom: unset;
+}

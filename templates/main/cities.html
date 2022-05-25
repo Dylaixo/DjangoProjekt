@@ -1,12 +1,7 @@
 {% extends 'main/base.html' %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-            <link rel="stylesheet" href="/templates/main/style.css">
-    <title>{% block title %}FindTravel | Wybierz Miasto{% endblock %}</title>
-</head>
-<body>
+
+    {% block title %}FindTravel | Wybierz Miasto{% endblock %}
+
 {% block content %}
 {% for city in city_list %}
     <div>
@@ -18,5 +13,3 @@
 
 {% endfor %}
 {% endblock %}
-</body>
-</html>

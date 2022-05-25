@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/templates/main/base.css">
+    <link rel="stylesheet" href="/templates/main/base.css" !important>
     <link rel="shortut icon" href="/templates/main/img/icone.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,300&family=Square+Peg&display=swap" rel="stylesheet">
 {% block style  %}<link href="stylesheet" href="#">{% endblock %}
     <title>{% block title %} Baza {% endblock %}</title>
+    {% block map %}   {{map.header.render|safe}}{% endblock %}
 </head>
 <body>
 <nav>
@@ -26,7 +27,7 @@
     <a href="#"></a>
     <a class="text" id="cart" href="/cart"><img src="/templates/main/img/map2.png" ><span>Plan</span></a>
 </nav>
-<div>
+<div class="content">
     {% block content %}
     {% endblock %}
 </div>

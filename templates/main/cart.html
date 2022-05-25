@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>FindTravel | Koszyk</title>
+{% extends 'main/base.html' %}
+    {% block title %}FindTravel | Koszyk{% endblock %}
+    {% block style %}<link rel="stylesheet" href="/templates/main/cart.css">{% endblock %}
     {{map.header.render|safe}}
 </head>
 <body>
+<<<<<<< HEAD
+{% block content %}
+<h1 class="title">Twoja trasa</h1>
+    <div class="desc">
+=======
     {% if map %}
 
   	{{map.html.render|safe}}
@@ -20,6 +23,7 @@
         <input style="height: 50px; width: 200px" type="submit" class="btn" value="Zakoncz" name="clicked">
     </form>
     {% endif %}
+>>>>>>> dd910b314276f6e503e445a09e3a721314e2a5b1
     {% for attraction in attraction_list %}
         <h1>{{ attraction.name }}</h1>
         <img src="/{{attraction.image}}">
@@ -33,5 +37,20 @@
         {% endif %}
 
     {% endfor %}
-</body>
-</html>
+    </div>
+    <div class="map">
+        {% if map %}
+
+  	{{map.html.render|safe}}
+  	<script>
+    	{{map.script.render|safe}}
+  	</script>
+        {% endif %}
+        <h1>Czas:{{ distance }} sec</h1>
+    {% if del %}
+    <form action="#" method="get">
+        <input style="height: 50px; width: 200px" type="submit" class="btn" value="Zakoncz" name="clicked">
+    </form>
+{% endif %}
+</div>
+{% endblock %}

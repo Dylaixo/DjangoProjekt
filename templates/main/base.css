@@ -1,3 +1,4 @@
+
 *{
     margin: 0;
     padding: 0;
@@ -21,12 +22,15 @@ nav img{
 body{
     min-height: 100vh;
     position: relative;
+
+}
+.folium-map{
+
 }
 nav{
     top:0;
     position: sticky;
-    height: 60px;
-    display: flex;
+    display: flex !important;
     justify-content: space-around;
     padding-top: 20px;
     padding-bottom: 10px;
