@@ -22,6 +22,7 @@ class Attractions(models.Model):
     time = models.PositiveSmallIntegerField(help_text="czas podany w minutach")
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     image = models.ImageField(upload_to=f'attractions_images/', blank=True)
+    price = models.PositiveIntegerField(default=0)
     desc = models.TextField()
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     lat = models.FloatField(default=0)

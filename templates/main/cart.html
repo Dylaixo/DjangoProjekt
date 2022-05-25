@@ -13,7 +13,8 @@
     	{{map.script.render|safe}}
   	</script>
 	{% endif %}
-    <h1>Czas:{{ distance }} sec</h1>
+    <h1>Czas:{{ time }} sec</h1>
+    <h1>Cena:{{ price }}</h1>
     {% if del %}
     <form action="#" method="get">
         <input style="height: 50px; width: 200px" type="submit" class="btn" value="Zakoncz" name="clicked">

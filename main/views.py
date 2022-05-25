@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from . import getroute
 import folium
 from django.http import HttpResponseNotFound
-
+from django.db.models import Sum
 
 
 def index(request):
@@ -76,7 +76,9 @@ def cart(request):
             folium.Marker(location=route['start_point'], icon=folium.Icon(icon='play', color='green')).add_to(m)
             folium.Marker(location=route['end_point'], icon=folium.Icon(icon='stop', color='red')).add_to(m)
             figure.render()
-        return render(request, "main/cart.html", {"attraction_list": attractions_list, "map": figure, "distance": distance, "del": True})
+        price = cart.attractions.all().aggregate(Sum('price'))['price__sum']
+        time = int(distance/60) + cart.attractions.all().aggregate(Sum('time'))['time__sum']
+        return render(request, "main/cart.html", {"attraction_list": attractions_list, "map": figure, "time": time, "del": True, "price": price})
     else:
         return render(request, "main/cart_empty.html", {})
 
