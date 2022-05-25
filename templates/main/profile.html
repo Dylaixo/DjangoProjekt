@@ -9,13 +9,13 @@
     <h2>Aktualny plan:</h2>
     <h3>{{ attraction_list.0.city }}</h3>
     {% for attraction in attraction_list %}
-        <p>{{ attraction.name }} ({{ attraction.time }}, tu wstawimy cene potem)</p>
+        <p>{{ attraction.name }} ({{ attraction.time }} min, {{ attraction.price}} zł)</p>
     {% endfor %}
     <h2>Poprzednie plany: </h2>
     {% for cart in cart_list %}
     <h3>{{ forloop.counter }}. {{ cart.attractions.all.0.city }}</h3>
         {% for attraction in cart.attractions.all %}
-        <p>{{ attraction.name }} ({{ attraction.time }}, tu wstawimy cene potem)</p>
+        <p>{{ attraction.name }} ({{ attraction.time }} min, {{ attraction.price}} zł)</p>
         {% endfor %}
     {% endfor %}
 {% endblock content %}

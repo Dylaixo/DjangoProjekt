@@ -8,21 +8,28 @@
     <div class="content_attractions">
     <div class="attractions">
         {% for attraction in attraction_list %}
-        <h1>{{ attraction.name }}</h1>
-        <img src="/{{attraction.image}}">
-        <p>Miasto: {{ attraction.city }}</p>
-        <p>Szacowany czas: {{ attraction.time }} min</p>
-        <p>Cena wstępu: {{ attraction.price }} zł</p>
-        {% if del %}
-            <form action="#" method="get">
-                <input type="hidden" value="{{ attraction.id }}" name="attraction_id">
-                <input style="height: 50px; width: 200px" type="submit" class="btn" value="Usun" name="del_attraction">
-            </form>
-        {% endif %}
-
+            <div class="attract">
+                <h2>{{ attraction.name }}</h2>
+            <div class="attract_content">
+                <div class="attract_img">
+                    <img src="/{{attraction.image}}">
+                </div>
+                <div class="attract_desc">
+                <p>Miasto: {{ attraction.city }}</p>
+                <p>Szacowany czas: {{ attraction.time }} min</p>
+                <p>Cena wstępu: {{ attraction.price }} zł</p>
+                {% if del %}
+                    <form action="#" method="get">
+                        <input type="hidden" value="{{ attraction.id }}" name="attraction_id">
+                        <input style="height: 50px; width: 200px" type="submit" class="btn" value="Usun" name="del_attraction">
+                    </form>
+                {% endif %}
+                </div>
+            </div>
+            </div>
     {% endfor %}
     </div>
-    <div class = "map_render">
+        <div class = "map_render">
     {% if map %}
 
   	{{map.html.render|safe}}
@@ -31,8 +38,8 @@
   	</script>
 	{% endif %}
     <div class="map_desc">
-    <h1>Czas:{{ time }} min.</h1>
-    <h1>Cena:{{ price }}</h1>
+    <p>Czas: {{ time }} min</p>
+    <p>Cena: {{ price }} zł</p>
     {% if del %}
     <form action="#" method="get">
         <input style="height: 50px; width: 200px" type="submit" class="btn" value="Zakoncz" name="clicked">
