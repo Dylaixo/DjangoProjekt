@@ -26,8 +26,25 @@ nav{
     position: unset;
 }
 .content{
-    display: flex;
     margin-bottom: 50px;
+}
+.content_attractions{
+    display: flex;
+}
+.map_render{
+    width: 100%;
+}
+.content{
+    font-family: 'Josefin Sans', sans-serif;
+}
+.map_desc{
+    text-align: center;
+}
+.attractions{
+    width: 30%;
+}
+p, h1, input{
+    font-family: 'Josefin Sans', sans-serif !important;
 }
 .map{
 

@@ -2,7 +2,6 @@
 *{
     margin: 0;
     padding: 0;
-    font-family: 'Square Peg', cursive;
 }
 .logo{
     padding: 0;
@@ -14,7 +13,7 @@
     height: 50px;
     padding-top: 0;
 }
-nav img{
+.map {
     padding-top: 10px;
     width: 40px;
     height: 40px;
@@ -22,7 +21,7 @@ nav img{
 body{
     min-height: 100vh;
     position: relative;
-
+    font-family: 'Josefin Sans', sans-serif !important;
 }
 .folium-map{
 
@@ -36,6 +35,10 @@ nav{
     padding-bottom: 10px;
     border-bottom: 1.5px black solid;
             background-color:floralwhite;
+    font-family: 'Square Peg', cursive !important;
+}
+.content{
+    font-family: 'Josefin Sans', sans-serif;
 }
 nav a{
     height: 40px;
@@ -50,6 +53,7 @@ nav .text:hover{
     transition: 0.7s;
     padding-bottom: 0;
     font-size: 50px;
+    text-decoration: underline;
 }
 #cart{
 
