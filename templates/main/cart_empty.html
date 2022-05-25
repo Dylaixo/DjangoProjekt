@@ -3,21 +3,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    {% block style %}<link rel="stylesheet" href="/templates/main/cart_empty.css">{% endblock %}
     <title>{% block title %}FindTravel | Koszyk{% endblock %}</title>
 </head>
 <body>
 {% block content %}
     <h1>Wybierz trasy stworzone przez nasz zespół lub <a href="/attractions">stwórz własną trasę!</a></h1>
-    <div class="container">
-    <h1>CONTAINER NA PRZYKLADOWE TRASY!!!!!</h1>
-    </div>
+    <div class="default">
+
     {% for cart in default_list %}
+
         <div>
         <a href="/cart/{{ cart.id }}">
             {% for attraction in cart.attractions.all %} {{ attraction.name }} {% endfor %}
         </a>
         </div>
+            </div>
     {% endfor %}
 {% endblock %}
 </body>

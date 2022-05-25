@@ -1,13 +1,13 @@
 {% extends 'main/base.html' %}
 
     {% block title %}FindTravel | Wybierz Miasto{% endblock %}
-
+    {% block style %}<link rel="stylesheet" href="/templates/main/cities.css">{% endblock %}
 {% block content %}
 {% for city in city_list %}
-    <div>
+    <div class="city">
         <a href="attractions/{{city.name}}">
-        <h2>{{ city.name }}</h2>
         <img src={{ city.image }}>
+        <h2>{{ city.name }}</h2>
         </a>
     </div>
 
