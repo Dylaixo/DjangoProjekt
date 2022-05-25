@@ -58,6 +58,9 @@ def cart(request):
         cart = Cart.objects.get(user=request.user, completed=False)
     except Cart.DoesNotExist:
         return render(request, "main/cart_empty.html", {})
+    if request.GET.get('del_attraction'):
+        tmp_attraction = Attractions.objects.get(id=request.GET.get('attraction_id'))
+        cart.attractions.remove(tmp_attraction)
     attractions_list = list(cart.attractions.all())
     if attractions_list:
         figure = folium.Figure()
@@ -78,15 +81,16 @@ def cart(request):
             figure.render()
         price = cart.attractions.all().aggregate(Sum('price'))['price__sum']
         time = int(distance/60) + cart.attractions.all().aggregate(Sum('time'))['time__sum']
-        return render(request, "main/cart.html", {"attraction_list": attractions_list, "map": figure, "time": time, "del": True, "price": price})
+        return render(request, "main/cart.html", {"attraction_list": attractions_list, "map": figure, "time": time,
+                                                  "del": True, "price": price})
     else:
         return render(request, "main/cart_empty.html", {})
 
 
 def cart_show(request, id):
     cart = Cart.objects.get(id=id)
-    if request.user is not cart.user:
-        return HttpResponseNotFound("Cant find that cart")
+    if request.user != cart.user:
+        return HttpResponseNotFound("You dont have permissions")
     attractions_list = list(cart.attractions.all())
     figure = folium.Figure()
     m = folium.Map(location=[attractions_list[0].lat,
