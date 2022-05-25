@@ -34,6 +34,7 @@ class Attractions(models.Model):
 
 
 class Cart(models.Model):
+    name = models.CharField(max_length=200, blank=True, null=True)
     attractions = models.ManyToManyField(Attractions, blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     completed = models.BooleanField()
