@@ -16,7 +16,7 @@
     	{{map.script.render|safe}}
   	</script>
 	{% endif %}
-    <h1>Czas:{{ time }} sec</h1>
+    <h1>Czas:{{ time }} min.</h1>
     <h1>Cena:{{ price }}</h1>
     {% if del %}
     <form action="#" method="get">
@@ -29,6 +29,7 @@
         <img src="/{{attraction.image}}">
         <p>Miasto: {{ attraction.city }}</p>
         <p>Szacowany czas: {{ attraction.time }} min</p>
+        <p>Cena wstępu: {{ attraction.price }} zł</p>
         {% if del %}
             <form action="#" method="get">
                 <input type="hidden" value="{{ attraction.id }}" name="attraction_id">

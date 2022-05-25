@@ -76,8 +76,12 @@ def cart(request):
             route = getroute.get_route(attractions_list[i-1].long, attractions_list[i-1].lat, attractions_list[i].long,
                                        attractions_list[i].lat)
             folium.PolyLine(route['route'], weight=8, color='blue', opacity=0.6).add_to(m)
-            folium.Marker(location=route['start_point'], icon=folium.Icon(icon='play', color='green')).add_to(m)
-            folium.Marker(location=route['end_point'], icon=folium.Icon(icon='stop', color='red')).add_to(m)
+            frame = folium.IFrame(attractions_list[i-1].name, width=100, height=30)
+            folium.Marker(location=route['start_point'], icon=folium.Icon(icon='play', color='green'),
+                          popup=folium.Popup(frame, max_width=100)).add_to(m)
+            frame = folium.IFrame(attractions_list[i].name, width=100, height=30)
+            folium.Marker(location=route['end_point'], icon=folium.Icon(icon='stop', color='red'),
+                          popup=folium.Popup(frame, max_width=100)).add_to(m)
             figure.render()
         price = cart.attractions.all().aggregate(Sum('price'))['price__sum']
         time = int(distance/60) + cart.attractions.all().aggregate(Sum('time'))['time__sum']
@@ -89,7 +93,7 @@ def cart(request):
 
 def cart_show(request, id):
     cart = Cart.objects.get(id=id)
-    if request.user != cart.user:
+    if request.user != cart.user and request.user.username != "default":
         return HttpResponseNotFound("You dont have permissions")
     attractions_list = list(cart.attractions.all())
     figure = folium.Figure()
@@ -102,12 +106,18 @@ def cart_show(request, id):
         route = getroute.get_route(attractions_list[i - 1].long, attractions_list[i - 1].lat, attractions_list[i].long,
                                    attractions_list[i].lat)
         folium.PolyLine(route['route'], weight=8, color='blue', opacity=0.6).add_to(m)
-        folium.Marker(location=route['start_point'], icon=folium.Icon(icon='play', color='green')).add_to(m)
-        folium.Marker(location=route['end_point'], icon=folium.Icon(icon='stop', color='red')).add_to(m)
+        frame = folium.IFrame(attractions_list[i - 1].name, width=100, height=30)
+        folium.Marker(location=route['start_point'], icon=folium.Icon(icon='play', color='green'),
+                      popup=folium.Popup(frame, max_width=100)).add_to(m)
+        frame = folium.IFrame(attractions_list[i].name, width=100, height=30)
+        folium.Marker(location=route['end_point'], icon=folium.Icon(icon='stop', color='red'),
+                      popup=folium.Popup(frame, max_width=100)).add_to(m)
         figure.render()
-        duration = duration + route['duration']
+    price = cart.attractions.all().aggregate(Sum('price'))['price__sum']
+    time = int(duration / 60) + cart.attractions.all().aggregate(Sum('time'))['time__sum']
     return render(request, "main/cart.html",
-                  {"attraction_list": attractions_list, "map": figure, "duration": duration, "del": False})
+                  {"attraction_list": attractions_list, "map": figure, "time": time,
+                   "del": False, "price": price})
 
 
 def about(request):
