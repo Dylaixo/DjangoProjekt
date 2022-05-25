@@ -4,6 +4,7 @@ from .models import Category, Cart, Attractions, City
 from django.contrib.auth.decorators import login_required
 from . import getroute
 import folium
+from django.http import HttpResponseNotFound
 
 
 
@@ -82,6 +83,8 @@ def cart(request):
 
 def cart_show(request, id):
     cart = Cart.objects.get(id=id)
+    if request.user is not cart.user:
+        return HttpResponseNotFound("Cant find that cart")
     attractions_list = list(cart.attractions.all())
     figure = folium.Figure()
     m = folium.Map(location=[attractions_list[0].lat,
