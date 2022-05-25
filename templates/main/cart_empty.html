@@ -12,6 +12,13 @@
     <div class="container">
     <h1>CONTAINER NA PRZYKLADOWE TRASY!!!!!</h1>
     </div>
+    {% for cart in default_list %}
+        <div>
+        <a href="/cart/{{ cart.id }}">
+            {% for attraction in cart.attractions.all %} {{ attraction.name }} {% endfor %}
+        </a>
+        </div>
+    {% endfor %}
 {% endblock %}
 </body>
 </html>

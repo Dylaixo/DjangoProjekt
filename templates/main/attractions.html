@@ -29,6 +29,13 @@
 {% endfor %}
     </div>
     <script src="/templates/main/filtr.js/"></script>
+    {% for cart in default_list %}
+        <div>
+        <a href="/cart/{{ cart.id }}">
+            {% for attraction in cart.attractions.all %} {{ attraction.name }} {% endfor %}
+        </a>
+        </div>
+    {% endfor %}
 {% endblock %}
 
 </body>

@@ -8,6 +8,20 @@ from django.http import HttpResponseNotFound
 from django.db.models import Sum
 
 
+def generate_default_carts(city=None):
+    try:
+        default = User.objects.get(username="default")
+        default_list = Cart.objects.filter(user=default)
+        if city is not None:
+            default_list_filtered = list()
+            for cart in default_list:
+                if list(cart.attractions.all())[0].city.name == city:
+                    default_list_filtered.append(cart)
+            return default_list_filtered
+    except Exception as e:
+        default_list = ()
+    return default_list
+
 def index(request):
     return render(request, "main/index.html", {})
 
@@ -24,7 +38,8 @@ def cities(request):
 
 def attractions(request, city):
     attraction_list = Attractions.objects.all()
-    context = {"attraction_list": attraction_list, "city": city}
+    context = {"attraction_list": attraction_list, "city": city,
+               "default_list": generate_default_carts(city)}
     return render(request, "main/attractions.html", context)
 
 
@@ -57,7 +72,7 @@ def cart(request):
     try:
         cart = Cart.objects.get(user=request.user, completed=False)
     except Cart.DoesNotExist:
-        return render(request, "main/cart_empty.html", {})
+        return render(request, "main/cart_empty.html", {"default_list": generate_default_carts()})
     if request.GET.get('del_attraction'):
         tmp_attraction = Attractions.objects.get(id=request.GET.get('attraction_id'))
         cart.attractions.remove(tmp_attraction)
@@ -88,12 +103,12 @@ def cart(request):
         return render(request, "main/cart.html", {"attraction_list": attractions_list, "map": figure, "time": time,
                                                   "del": True, "price": price})
     else:
-        return render(request, "main/cart_empty.html", {})
+        return render(request, "main/cart_empty.html", {"default_list": generate_default_carts()})
 
 
 def cart_show(request, id):
     cart = Cart.objects.get(id=id)
-    if request.user != cart.user and request.user.username != "default":
+    if request.user != cart.user and cart.user.username != "default":
         return HttpResponseNotFound("You dont have permissions")
     attractions_list = list(cart.attractions.all())
     figure = folium.Figure()
