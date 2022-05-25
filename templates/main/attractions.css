@@ -16,6 +16,7 @@ body{
     margin-top: 20px;
 }
 .header-title{
+    margin-top: 40px;
     text-align: center;
     font-size: 45px;
 }
@@ -39,11 +40,6 @@ a{
     color: black;
     font-size: 30px;
 }
-a:hover{
-    text-decoration: underline;
-    font-size: 35px;
-    transition: 0.75s;
-}
 .attract:hover img{
     box-shadow: 5px 4px 5px 5px grey;
 }
@@ -61,10 +57,24 @@ img:hover{
     opacity: 70%;
     transition: 0.75s;
 }
+.default:hover{
+    text-decoration: underline;
+}
 .container {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     margin-right: 0;
     justify-content: space-around;
+    padding-bottom: 50px;
+}
+.default_content{
+    margin: 30px 0 30px 20px;
+}
+.default_name{
+    margin-top: 20px;
+    font-size: 35px;
+}
+.default_attractions{
+    font-size: 30px;
 }

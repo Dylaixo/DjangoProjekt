@@ -40,7 +40,9 @@ nav{
 }
 .attract_img{
     width: 40%;
-box-shadow: 5px 4px 5px 5px grey;
+}
+.attract_img img{
+    box-shadow: 5px 4px 5px 5px grey;
 }
 p, .btl  {
     font-size: 20px;

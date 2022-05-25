@@ -1,25 +1,18 @@
 {% extends 'main/base.html' %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}FindTravel | Koszyk{% endblock %}</title>
-</head>
-<body>
+{% block title %}FindTravel | Koszyk{% endblock %}
+    {% block style %}<link rel="stylesheet" href="/templates/main/cart_empty.css">{% endblock %}
 {% block content %}
-    <h1>Wybierz trasy stworzone przez nasz zespół lub <a href="/attractions">stwórz własną trasę!</a></h1>
+    <h1>Wybierz trasy stworzone przez nasz zespół lub <a class="create" href="/attractions">stwórz własną trasę!</a></h1>
     <div class="default">
 
     {% for cart in default_list %}
 
-        <div>
+        <div class="default">
         <a href="/cart/{{ cart.id }}">
-            <h1>{{ cart.name }}</h1>
-            {% for attraction in cart.attractions.all %} {{ attraction.name }}, {% endfor %}
+            <h2>{{ cart.name }}</h2>
+            <p>{% for attraction in cart.attractions.all %} {{ attraction.name }}, {% endfor %}</p>
         </a>
         </div>
             </div>
     {% endfor %}
 {% endblock %}
-</body>
-</html>

@@ -8,9 +8,6 @@
     text-align: center;
     font-size: 30px;
 }
-body{
-    padding-bottom: 50px;
-}
 .desc{
     display: block;
 }
@@ -21,6 +18,21 @@ body{
     margin: 0 50px 0 40px;
     border-radius: 5px;
         box-shadow: 5px 4px 5px 5px grey;
+}
+.back{
+    margin: 30px 0 0 20px;
+
+}
+.back a{
+    text-decoration: none;
+    color: black;
+    font-size: 25px;
+}
+.back a:visited{
+    color: black;
+}
+.back a:hover{
+    text-decoration: underline;
 }
 .attraction{
     display: flex;

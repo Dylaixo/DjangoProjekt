@@ -1,16 +1,25 @@
-.content {
+.container {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     margin:50px 0 0 0 ;
     justify-content: space-around;
 }
+
 .cities{
     width: 25%;
 }
+.city{
+    margin-top: 30px;
+}
+h1{
+    display: block;
+    text-align: center;
+    margin: 30px 0 0 0;
+}
 .city img{
-    width: 400px;
-    height:400px;
+    width: 300px;
+    height:300px;
     margin: 0 50px 0 40px;
     border-radius: 5px;
         box-shadow: 5px 4px 5px 5px grey;

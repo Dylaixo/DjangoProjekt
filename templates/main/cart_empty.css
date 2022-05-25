@@ -3,8 +3,32 @@ h1{
     margin: 30px 0 20px 0;
     font-size: 40px;
 }
-h1 a, h1 a:visited{
+h1 a{
     color: black;
+}
+a:visited{
+    color: black;
+}
+h2{
+    font-size: 35px;
+    font-weight: bold;
+}
+.create{
+    text-decoration: underline;}
+p{
+    font-size: 30px;
+}
+a:hover{
+    text-decoration: underline;
+}
+a{
+    text-decoration: none;
+        color: black !important;
+}
+.default{
+    padding-top: 20px ;
+
+    text-align: center;
 }
 .container{
     background-color: green;

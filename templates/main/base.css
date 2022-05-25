@@ -53,6 +53,7 @@ nav .text:hover{
     transition: 0.7s;
     padding-bottom: 0;
     font-size: 50px;
+    color: black !important;
     text-decoration: underline;
 }
 #cart{
