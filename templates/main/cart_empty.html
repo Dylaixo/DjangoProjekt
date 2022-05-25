@@ -14,7 +14,8 @@
 
         <div>
         <a href="/cart/{{ cart.id }}">
-            {% for attraction in cart.attractions.all %} {{ attraction.name }} {% endfor %}
+            <h1>{{ cart.name }}</h1>
+            {% for attraction in cart.attractions.all %} {{ attraction.name }}, {% endfor %}
         </a>
         </div>
             </div>

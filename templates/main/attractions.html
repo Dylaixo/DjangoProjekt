@@ -32,7 +32,10 @@
     {% for cart in default_list %}
         <div>
         <a href="/cart/{{ cart.id }}">
-            {% for attraction in cart.attractions.all %} {{ attraction.name }} {% endfor %}
+            {% if cart.name is not None %}
+            <h1>{{ cart.name }}</h1>
+            {% endif %}
+            {% for attraction in cart.attractions.all %} {{ attraction.name }}, {% endfor %}
         </a>
         </div>
     {% endfor %}
