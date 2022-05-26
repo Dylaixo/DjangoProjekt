@@ -91,3 +91,9 @@ body{
 footer{
     bottom: unset !important;
 }
+.btns{
+    display: flex;
+}
+ .map_desc .btn{
+    margin-left: 300px;
+}

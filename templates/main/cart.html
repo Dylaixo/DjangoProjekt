@@ -40,10 +40,15 @@
     <div class="map_desc">
     <p>Czas: {{ time }} min</p>
     <p>Cena: {{ price }} zł</p>
+    <div class="btns">
     {% if del %}
     <form action="#" method="get">
-        <input style="height: 50px; width: 200px" type="submit" class="btn" value="Zakoncz" name="clicked">
+        <input  type="submit" class="btn" value="Zakoncz" name="clicked">
     </form>
+        <form action="#" method="get">
+        <input  type="submit" class="btn" value="Pobierz PDF" name="clicked">
+    </form>
+        </div>
         </div>
     {% endif %}
 </div>
