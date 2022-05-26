@@ -89,5 +89,5 @@ body{
     padding-bottom: 50px;
 }
 footer{
-    bottom: 0 !important;
+    bottom: unset !important;
 }
