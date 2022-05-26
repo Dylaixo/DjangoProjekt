@@ -3,6 +3,7 @@ h1{
     margin: 30px 0 20px 0;
     font-size: 40px;
 }
+
 h1 a{
     color: black;
 }
@@ -27,7 +28,7 @@ a{
 }
 .default{
     padding-top: 20px ;
-
+    color: black;
     text-align: center;
 }
 .container{

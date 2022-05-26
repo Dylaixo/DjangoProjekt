@@ -19,11 +19,13 @@ body{
     margin-top: 40px;
     text-align: center;
     font-size: 45px;
+    margin-bottom: 20px;
 }
 .filtr{
     text-align: center;
 }
 .filtr h2{
+    margin-bottom: 20px;
     margin-right: auto;
     display: inline;
     font-size: 30px;
