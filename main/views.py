@@ -110,10 +110,9 @@ def cart_show(request, id):
         if attraction == first_attraction:
             attractions_list.remove(attraction)
             attractions_list.insert(0, attraction)
-    duration = cart.time
     figure = getroute.generate_map(attractions_list)
     price = cart.attractions.all().aggregate(Sum('price'))['price__sum']
-    time = int(duration / 60) + cart.attractions.all().aggregate(Sum('time'))['time__sum']
+    time = cart.time
     return render(request, "main/cart.html",
                   {"attraction_list": attractions_list, "map": figure, "time": time,
                    "del": False, "price": price})
