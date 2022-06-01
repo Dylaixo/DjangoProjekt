@@ -30,14 +30,25 @@ def get_route(pickup_lon, pickup_lat, dropoff_lon, dropoff_lat):
 def shortest_path(attractions_list):
     y = len(attractions_list)
     routes = np.zeros((y, y))
-    for i in range(0, len(attractions_list)):
-        for j in range(i, len(attractions_list)):
+    for i in range(0, y):
+        for j in range(i, y):
             route = get_route(attractions_list[j].long, attractions_list[j].lat,
                                        attractions_list[i].long, attractions_list[i].lat)
             routes[j][i] = routes[i][j] = route['duration']
-    permutation, distance = solve_tsp_dynamic_programming(routes)
-    print(permutation)
-    print(distance)
+    distance = 0
+    permutation = [0]
+    routes_visited = np.zeros(y)
+    routes_visited[0] = 1
+    start = 0
+    for i in range(0, y-1):
+        min_dist = (99999999, 0)
+        for j in range(i+1, y):
+            if routes_visited[j] == 0 and min_dist[0] > routes[start][j]:
+                min_dist = (routes[start][j], j)
+        permutation.append(min_dist[1])
+        distance += min_dist[0]
+        routes_visited[min_dist[1]] = 1
+        start = min_dist[1]
     return permutation, distance
 
 

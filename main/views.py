@@ -81,26 +81,33 @@ def cart(request):
         figure = folium.Figure()
         m = folium.Map(location=[attractions_list[0].lat,
                                  attractions_list[0].long],
-                       zoom_start=10)
+                       zoom_start=15)
         m.add_to(figure)
+        if request.GET.get('change_first'):
+            new_first_attraction = Attractions.objects.get(id=request.GET.get('attraction_id'))
+            for index, attraction in enumerate(attractions_list):
+                if attraction == new_first_attraction:
+                    attractions_list.remove(attraction)
+                    attractions_list.insert(0, attraction)
+                    break
         permutation, distance = getroute.shortest_path(attractions_list)
         tmp_list = []
         for i in permutation:
             tmp_list.append(attractions_list[i])
         for i in range(1, len(tmp_list)):
-            route = getroute.get_route(attractions_list[i-1].long, attractions_list[i-1].lat, attractions_list[i].long,
-                                       attractions_list[i].lat)
+            route = getroute.get_route(tmp_list[i-1].long, tmp_list[i-1].lat, tmp_list[i].long,
+                                       tmp_list[i].lat)
             folium.PolyLine(route['route'], weight=8, color='blue', opacity=0.6).add_to(m)
-            frame = folium.IFrame(attractions_list[i-1].name, width=100, height=30)
+            frame = folium.IFrame(tmp_list[i-1].name, width=100, height=30)
             folium.Marker(location=route['start_point'], icon=folium.Icon(icon='play', color='green'),
                           popup=folium.Popup(frame, max_width=100)).add_to(m)
-            frame = folium.IFrame(attractions_list[i].name, width=100, height=30)
+            frame = folium.IFrame(tmp_list[i].name, width=100, height=30)
             folium.Marker(location=route['end_point'], icon=folium.Icon(icon='stop', color='red'),
                           popup=folium.Popup(frame, max_width=100)).add_to(m)
             figure.render()
         price = cart.attractions.all().aggregate(Sum('price'))['price__sum']
         time = int(distance/60) + cart.attractions.all().aggregate(Sum('time'))['time__sum']
-        return render(request, "main/cart.html", {"attraction_list": attractions_list, "map": figure, "time": time,
+        return render(request, "main/cart.html", {"attraction_list": tmp_list, "map": figure, "time": time,
                                                   "del": True, "price": price})
     else:
         return render(request, "main/cart_empty.html", {"default_list": generate_default_carts()})
