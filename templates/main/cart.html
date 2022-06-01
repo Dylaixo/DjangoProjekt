@@ -1,8 +1,6 @@
 {% extends 'main/base.html' %}
     {% block title %}FindTravel | Koszyk{% endblock %}
     {% block style %}<link rel="stylesheet" href="/templates/main/cart.css">{% endblock %}
-</head>
-<body>
 {% block content %}
 <h1 class="title">Twoja trasa</h1>
     <div class="content_attractions">
@@ -48,9 +46,12 @@
         </div>
         </div>
     {% endif %}
-                <form action="#" method="get">
-        <input  type="submit" class="btn" value="Pobierz PDF" name="pdf">
-    </form>
+
+
 </div>
+
     </div>
+         <form class="pdf"action="#" method="get">
+            <input  type="submit" class="btn" value="Pobierz PDF" name="pdf">
+    </form>
 {% endblock %}

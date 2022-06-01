@@ -95,5 +95,9 @@ body{
     margin-left: 300px;
 }
  footer{
-     bottom: 0;
+     bottom: unset;
+
+}
+ .pdf{
+     text-align: center;
  }
