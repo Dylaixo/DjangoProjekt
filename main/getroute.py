@@ -1,5 +1,6 @@
 import requests
 import polyline
+import folium
 from python_tsp.exact import solve_tsp_dynamic_programming
 import numpy as np
 
@@ -42,7 +43,7 @@ def shortest_path(attractions_list):
     start = 0
     for i in range(0, y-1):
         min_dist = (99999999, 0)
-        for j in range(i+1, y):
+        for j in range(0, y):
             if routes_visited[j] == 0 and min_dist[0] > routes[start][j]:
                 min_dist = (routes[start][j], j)
         permutation.append(min_dist[1])
@@ -51,4 +52,23 @@ def shortest_path(attractions_list):
         start = min_dist[1]
     return permutation, distance
 
+
+def generate_map(attractions_list):
+    figure = folium.Figure()
+    m = folium.Map(location=[attractions_list[0].lat,
+                             attractions_list[0].long],
+                   zoom_start=15)
+    m.add_to(figure)
+    for i in range(1, len(attractions_list)):
+        route = get_route(attractions_list[i - 1].long, attractions_list[i - 1].lat, attractions_list[i].long,
+                                   attractions_list[i].lat)
+        folium.PolyLine(route['route'], weight=8, color='blue', opacity=0.6).add_to(m)
+        frame = folium.IFrame(attractions_list[i - 1].name, width=100, height=30)
+        folium.Marker(location=route['start_point'], icon=folium.Icon(icon='play', color='green'),
+                      popup=folium.Popup(frame, max_width=100)).add_to(m)
+        frame = folium.IFrame(attractions_list[i].name, width=100, height=30)
+        folium.Marker(location=route['end_point'], icon=folium.Icon(icon='stop', color='red'),
+                      popup=folium.Popup(frame, max_width=100)).add_to(m)
+        figure.render()
+    return figure
 

@@ -38,3 +38,5 @@ class Cart(models.Model):
     attractions = models.ManyToManyField(Attractions, blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     completed = models.BooleanField()
+    first_attraction = models.ForeignKey(Attractions, null=True, on_delete=models.CASCADE,
+                                         related_name="first_attraction")
