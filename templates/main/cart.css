@@ -88,12 +88,12 @@ p, h1, input{
 body{
     padding-bottom: 50px;
 }
-footer{
-    bottom: unset !important;
-}
 .btns{
     display: flex;
 }
  .map_desc .btn{
     margin-left: 300px;
 }
+ footer{
+     bottom: 0;
+ }
