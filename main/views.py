@@ -4,8 +4,12 @@ from .models import Category, Cart, Attractions, City
 from django.contrib.auth.decorators import login_required
 from . import getroute
 import folium
-from django.http import HttpResponseNotFound
+from django.http import HttpResponseNotFound, FileResponse
 from django.db.models import Sum
+import io
+from reportlab.pdfgen import canvas
+from .pdf import pdfbuffer
+
 
 
 def generate_default_carts(city=None):
@@ -100,8 +104,12 @@ def cart(request):
         return render(request, "main/cart_empty.html", {"default_list": generate_default_carts()})
 
 
+
 def cart_show(request, id):
     cart = Cart.objects.get(id=id)
+    if request.GET.get('pdf'):
+        buffer = pdfbuffer(cart)
+        return FileResponse(buffer, as_attachment=False, filename='hello.pdf')
     if request.user != cart.user and cart.user.username != "default":
         return HttpResponseNotFound("You dont have permissions")
     attractions_list = list(cart.attractions.all())
