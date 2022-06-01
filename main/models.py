@@ -40,3 +40,4 @@ class Cart(models.Model):
     completed = models.BooleanField()
     first_attraction = models.ForeignKey(Attractions, null=True, on_delete=models.CASCADE,
                                          related_name="first_attraction")
+    time = models.PositiveIntegerField(null=True, blank=True)

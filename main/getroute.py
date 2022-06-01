@@ -34,14 +34,14 @@ def shortest_path(attractions_list):
     for i in range(0, y):
         for j in range(i, y):
             route = get_route(attractions_list[j].long, attractions_list[j].lat,
-                                       attractions_list[i].long, attractions_list[i].lat)
+                              attractions_list[i].long, attractions_list[i].lat)
             routes[j][i] = routes[i][j] = route['duration']
     distance = 0
     permutation = [0]
     routes_visited = np.zeros(y)
     routes_visited[0] = 1
     start = 0
-    for i in range(0, y-1):
+    for i in range(0, y - 1):
         min_dist = (99999999, 0)
         for j in range(0, y):
             if routes_visited[j] == 0 and min_dist[0] > routes[start][j]:
@@ -61,7 +61,7 @@ def generate_map(attractions_list):
     m.add_to(figure)
     for i in range(1, len(attractions_list)):
         route = get_route(attractions_list[i - 1].long, attractions_list[i - 1].lat, attractions_list[i].long,
-                                   attractions_list[i].lat)
+                          attractions_list[i].lat)
         folium.PolyLine(route['route'], weight=8, color='blue', opacity=0.6).add_to(m)
         frame = folium.IFrame(attractions_list[i - 1].name, width=100, height=30)
         folium.Marker(location=route['start_point'], icon=folium.Icon(icon='play', color='green'),
@@ -71,4 +71,3 @@ def generate_map(attractions_list):
                       popup=folium.Popup(frame, max_width=100)).add_to(m)
         figure.render()
     return figure
-

@@ -22,6 +22,7 @@ def generate_default_carts(city=None):
         default_list = ()
     return default_list
 
+
 def index(request):
     return render(request, "main/index.html", {})
 
@@ -67,6 +68,7 @@ def add_attraction(request, id):
 def cart(request):
     if request.GET.get('clicked'):
         cart = Cart.objects.get(user=request.user, completed=False)
+        cart.time = int(request.GET.get('time'))
         cart.completed = True
         cart.save()
     try:
@@ -81,7 +83,7 @@ def cart(request):
         first_attraction = cart.first_attraction
         if request.GET.get('change_first'):
             first_attraction = Attractions.objects.get(id=request.GET.get('attraction_id'))
-        for index, attraction in enumerate(attractions_list):
+        for attraction in attractions_list:
             if attraction == first_attraction:
                 attractions_list.remove(attraction)
                 attractions_list.insert(0, attraction)
@@ -104,11 +106,11 @@ def cart_show(request, id):
         return HttpResponseNotFound("You dont have permissions")
     attractions_list = list(cart.attractions.all())
     first_attraction = cart.first_attraction
-    for index, attraction in enumerate(attractions_list):
+    for attraction in attractions_list:
         if attraction == first_attraction:
             attractions_list.remove(attraction)
             attractions_list.insert(0, attraction)
-    duration = 0
+    duration = cart.time
     figure = getroute.generate_map(attractions_list)
     price = cart.attractions.all().aggregate(Sum('price'))['price__sum']
     time = int(duration / 60) + cart.attractions.all().aggregate(Sum('time'))['time__sum']
