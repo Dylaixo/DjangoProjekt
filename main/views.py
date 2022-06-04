@@ -70,11 +70,7 @@ def add_attraction(request, id):
 
 @login_required()
 def cart(request):
-    if request.GET.get('clicked'):
-        cart = Cart.objects.get(user=request.user, completed=False)
-        cart.time = int(request.GET.get('time'))
-        cart.completed = True
-        cart.save()
+
     try:
         cart = Cart.objects.get(user=request.user, completed=False)
     except Cart.DoesNotExist:
@@ -92,12 +88,18 @@ def cart(request):
                 attractions_list.remove(attraction)
                 attractions_list.insert(0, attraction)
         permutation, distance = getroute.shortest_path(attractions_list)
+        if request.GET.get('clicked'):
+            cart.distance = ';'.join(str(x) for x in distance)
+            cart.completed = True
+            cart.save()
         tmp_list = []
         for i in permutation:
             tmp_list.append(attractions_list[i])
-        figure = getroute.generate_map(tmp_list)
+        figure = getroute.generate_map(tmp_list, distance)
         price = cart.attractions.all().aggregate(Sum('price'))['price__sum']
-        time = int(distance / 60) + cart.attractions.all().aggregate(Sum('time'))['time__sum']
+
+        time = int(sum(distance)) + cart.attractions.all().aggregate(Sum('time'))['time__sum']
+
         return render(request, "main/cart.html", {"attraction_list": tmp_list, "map": figure, "time": time,
                                                   "del": True, "price": price})
     else:
@@ -118,9 +120,11 @@ def cart_show(request, id):
         if attraction == first_attraction:
             attractions_list.remove(attraction)
             attractions_list.insert(0, attraction)
-    figure = getroute.generate_map(attractions_list)
+
     price = cart.attractions.all().aggregate(Sum('price'))['price__sum']
-    time = cart.time
+    distance = [int(i) for i in cart.distance.split(';')]
+    figure = getroute.generate_map(attractions_list, distance)
+    time = sum(distance) + sum(attraction.time for attraction in attractions_list)
     return render(request, "main/cart.html",
                   {"attraction_list": attractions_list, "map": figure, "time": time,
                    "del": False, "price": price})
