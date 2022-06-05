@@ -106,7 +106,6 @@ def cart(request):
         return render(request, "main/cart_empty.html", {"default_list": generate_default_carts()})
 
 
-
 def cart_show(request, id):
     cart = Cart.objects.get(id=id)
     if request.GET.get('pdf'):
@@ -120,7 +119,6 @@ def cart_show(request, id):
         if attraction == first_attraction:
             attractions_list.remove(attraction)
             attractions_list.insert(0, attraction)
-
     price = cart.attractions.all().aggregate(Sum('price'))['price__sum']
     distance = [int(i) for i in cart.distance.split(';')]
     figure = getroute.generate_map(attractions_list, distance)

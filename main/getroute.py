@@ -3,6 +3,7 @@ import polyline
 import folium
 from python_tsp.exact import solve_tsp_dynamic_programming
 import numpy as np
+import json
 
 
 def get_route(pickup_lon, pickup_lat, dropoff_lon, dropoff_lat):
@@ -28,7 +29,32 @@ def get_route(pickup_lon, pickup_lat, dropoff_lon, dropoff_lat):
     return out
 
 
-def shortest_path(attractions_list):
+def shortest_path(attracions_list):
+    locations_tmp = []
+    for index, attracion in enumerate(attracions_list):
+        tmp = f'"address":"{index + 1}","lat":"{attracion.lat}","lng":"{attracion.long}"'
+        locations_tmp.append("{"+tmp+"}")
+    print(locations_tmp)
+    locations = {"locations": "[" + ','.join(locations_tmp) + "]"}
+    print(locations)
+    url = 'https://api.routexl.com/tour'
+    username = 'C2g'
+    password = 'pilkoryj1'
+    g = requests.post(url, auth=(username, password), data=locations)
+    data = json.loads(g.text)
+    print(g)
+    permutation = []
+    tmp_distance = []
+    distance = []
+    for key in data['route']:
+        permutation.append(int(data['route'][key]['name']) - 1)
+    for i in range(1, len(permutation)):
+        dist = get_route(attracions_list[permutation[i]].long, attracions_list[permutation[i]].lat,
+                         attracions_list[permutation[i-1]].long, attracions_list[permutation[i-1]].lat)
+        distance.append(round(dist['duration']/60))
+    return permutation, distance
+
+def shortest_path2(attractions_list):
     y = len(attractions_list)
     routes = np.zeros((y, y))
     for i in range(0, y):
