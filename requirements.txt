@@ -4,3 +4,4 @@ requests>=2.2
 polyline>=1.4.0
 python_tsp>=0.2.1
 folium>=0.12
+reportlab>=3.6.9
