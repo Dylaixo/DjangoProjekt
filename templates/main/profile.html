@@ -3,7 +3,7 @@
     {% block style %}<link rel="stylesheet" href="/templates/main/profile.css">{% endblock %}
 {% block content %}
 
-    <h1>Profil użytkownika {{user.username}}</h1>
+    <h1>Profil użytkownika: {{user.username}}</h1>
     <h2>Imie: {{user.first_name}}</h2>
     <h2>Nazwisko: {{user.last_name}}</h2>
     <h2>Aktualny plan:</h2>
@@ -13,7 +13,7 @@
         <p>{{ attraction.name }} ({{ attraction.time }} min, {{ attraction.price}} zł)</p>
     {% endfor %}
     </a>
-    <h2>Poprzednie plany: </h2>
+    <h2>Poprzednie plany (Pobierz PDF) : </h2>
     {% for cart in cart_list %}
         <a href="/cart/{{ cart.id }}">
     <h3>{{ forloop.counter }}. {{ cart.attractions.all.0.city }}</h3>

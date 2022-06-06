@@ -58,8 +58,13 @@ p, .btl  {
     padding-top: 20px;
 }
 .btn{
+    margin-top: 10px;
     height: 25px !important;
     width: 120px !important;
+}
+.del{
+    height: 25px !important;
+    width: 60px !important;
 }
 .attractions{
     width: 45%;
@@ -88,12 +93,6 @@ p, h1, input{
 body{
     padding-bottom: 50px;
     height: 100vh;
-}
-.btns{
-    display: flex;
-}
- .map_desc .btn{
-    margin-left: 300px;
 }
  footer{
      bottom: auto;

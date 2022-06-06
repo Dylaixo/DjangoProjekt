@@ -4,4 +4,12 @@
 }
 h2, h3{
     margin-top: 20px;
+    font-weight: bold;
+}
+a{
+    color: black;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
 }
