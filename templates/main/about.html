@@ -1,13 +1,6 @@
 {% extends 'main/base.html' %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-        {% block style %}<link rel="stylesheet" href="/templates/main/about.css">{% endblock %}
-    <title >{% block title %}FindTravel | O nas{% endblock %}</title>
-    <title>Title</title>
-</head>
-<body>
+{% block style %}<link rel="stylesheet" href="/templates/main/about.css">{% endblock %}
+{% block title %}FindTravel | O nas{% endblock %}
 {% block content %}
     <div class="container">
     <div>
@@ -40,5 +33,3 @@
     </div>
     </div>
 {% endblock %}
-</body>
-</html>

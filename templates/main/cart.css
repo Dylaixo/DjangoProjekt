@@ -59,7 +59,7 @@ p, .btl  {
 }
 .btn{
     height: 25px !important;
-    width: 100px !important;
+    width: 120px !important;
 }
 .attractions{
     width: 45%;
@@ -87,6 +87,7 @@ p, h1, input{
 }
 body{
     padding-bottom: 50px;
+    height: 100vh;
 }
 .btns{
     display: flex;
@@ -95,7 +96,7 @@ body{
     margin-left: 300px;
 }
  footer{
-     bottom: unset;
+     bottom: auto;
 
 }
  .pdf{

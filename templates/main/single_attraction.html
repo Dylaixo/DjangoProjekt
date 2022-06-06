@@ -1,13 +1,6 @@
 {% extends 'main/base.html' %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {% block style %}<link rel="stylesheet" href="/templates/main/single_attraction.css">{% endblock %}
-    <title>{% block title %}FindTravel | {{ attraction.name }}{% endblock %}</title>
-</head>
-<body>
-
+{% block style %}<link rel="stylesheet" href="/templates/main/single_attraction.css">{% endblock %}
+{% block title %}FindTravel | {{ attraction.name }}{% endblock %}
 {% block content %}
 
         <h1 class="name">{{ attraction.name }}</h1>
@@ -30,8 +23,6 @@
                    </a>
         </div>
     <div class="back">
-    <a href="/attractions/{{ attraction.city }}">Wróć do atrakcji w mieście {{ attraction.city }}</a>
+    <a href="/attractions/{{ attraction.city }}"><-- Wróć do atrakcji w mieście {{ attraction.city }}</a>
 </div>
 {% endblock %}
-</body>
-</html>
