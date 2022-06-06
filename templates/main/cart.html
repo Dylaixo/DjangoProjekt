@@ -2,6 +2,7 @@
     {% block title %}FindTravel | Koszyk{% endblock %}
     {% block style %}<link rel="stylesheet" href="/templates/main/cart.css">{% endblock %}
 {% block content %}
+{% load static %}
 <h1 class="title">Twoja trasa</h1>
     <div class="content_attractions">
         <div class="attractions">
@@ -10,7 +11,7 @@
                         <h2>{{ attraction.name }}</h2>
                     <div class="attract_content">
                         <div class="attract_img">
-                            <img src="/{{attraction.image}}">
+                            <img src="{{ STATIC_ROOT }}/{{attraction.image}}">
                         </div>
                         <div class="attract_desc">
                             <p>Miasto: {{ attraction.city }}</p>
