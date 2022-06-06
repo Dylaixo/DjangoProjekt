@@ -11,6 +11,17 @@ from reportlab.pdfgen import canvas
 from .pdf import pdfbuffer
 
 
+def set_list_first_and_last_attractions(attractions_list, first, last):
+    for attraction in attractions_list:
+        if attraction == first:
+            attractions_list.remove(attraction)
+            attractions_list.insert(0, attraction)
+        if attraction == last:
+            attractions_list.remove(attraction)
+            attractions_list.insert(len(attractions_list), attraction)
+    return attractions_list
+
+
 
 def generate_default_carts(city=None):
     try:
@@ -80,13 +91,39 @@ def cart(request):
         cart.attractions.remove(tmp_attraction)
     attractions_list = list(cart.attractions.all())
     if attractions_list:
-        first_attraction = cart.first_attraction
+        try:
+            first_attraction = cart.first_attraction
+            last_attraction = cart.last_attraction
+        except:
+            first_attraction = attractions_list[0]
+            if len(attractions_list) == 1:
+                last_attraction = attractions_list[0]
+            else:
+                last_attraction = attractions_list[1]
+            cart.first_attraction = first_attraction
+            cart.last_attraction = last_attraction
+            cart.save()
         if request.GET.get('change_first'):
             first_attraction = Attractions.objects.get(id=request.GET.get('attraction_id'))
-        for attraction in attractions_list:
-            if attraction == first_attraction:
-                attractions_list.remove(attraction)
-                attractions_list.insert(0, attraction)
+            if last_attraction == first_attraction:
+                for attraction in attractions_list:
+                    if attraction != last_attraction:
+                        last_attraction = attraction
+                        cart.last_attraction = last_attraction
+                        break
+            cart.first_attraction = first_attraction
+            cart.save()
+        if request.GET.get('change_last'):
+            last_attraction = Attractions.objects.get(id=request.GET.get('attraction_id'))
+            if first_attraction == last_attraction:
+                for attraction in attractions_list:
+                    if attraction != last_attraction:
+                        first_attraction = attraction
+                        cart.first_attraction = first_attraction
+                        break
+            cart.last_attraction = last_attraction
+            cart.save()
+        attractions_list = set_list_first_and_last_attractions(attractions_list, first_attraction, last_attraction)
         permutation, distance = getroute.shortest_path(attractions_list)
         if request.GET.get('clicked'):
             cart.distance = ';'.join(str(x) for x in distance)
@@ -97,9 +134,7 @@ def cart(request):
             tmp_list.append(attractions_list[i])
         figure = getroute.generate_map(tmp_list, distance)
         price = cart.attractions.all().aggregate(Sum('price'))['price__sum']
-
         time = int(sum(distance)) + cart.attractions.all().aggregate(Sum('time'))['time__sum']
-
         return render(request, "main/cart.html", {"attraction_list": tmp_list, "map": figure, "time": time,
                                                   "del": True, "price": price})
     else:
@@ -115,10 +150,8 @@ def cart_show(request, id):
         return HttpResponseNotFound("You dont have permissions")
     attractions_list = list(cart.attractions.all())
     first_attraction = cart.first_attraction
-    for attraction in attractions_list:
-        if attraction == first_attraction:
-            attractions_list.remove(attraction)
-            attractions_list.insert(0, attraction)
+    last_attraction = cart.last_attraction
+    attractions_list = set_list_first_and_last_attractions(attractions_list, first_attraction, last_attraction)
     price = cart.attractions.all().aggregate(Sum('price'))['price__sum']
     distance = [int(i) for i in cart.distance.split(';')]
     figure = getroute.generate_map(attractions_list, distance)

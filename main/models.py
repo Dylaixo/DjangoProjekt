@@ -40,4 +40,6 @@ class Cart(models.Model):
     completed = models.BooleanField()
     first_attraction = models.ForeignKey(Attractions, null=True, on_delete=models.CASCADE,
                                          related_name="first_attraction")
+    last_attraction = models.ForeignKey(Attractions, null=True, on_delete=models.CASCADE,
+                                         related_name="last_attraction")
     distance = models.CharField(max_length=1000, blank=True, null=True)

@@ -2,58 +2,58 @@
     {% block title %}FindTravel | Koszyk{% endblock %}
     {% block style %}<link rel="stylesheet" href="/templates/main/cart.css">{% endblock %}
 {% block content %}
-    <h1 class="title">Twoja trasa</h1>
+<h1 class="title">Twoja trasa</h1>
     <div class="content_attractions">
-        <div class="attractions">
-            {% for attraction in attraction_list %}
-                    <div class="attract">
-                        <h2>{{ attraction.name }}</h2>
-                    <div class="attract_content">
-                        <div class="attract_img">
-                            <img src="/{{attraction.image}}">
-                        </div>
-                        <div class="attract_desc">
-                            <p>Miasto: {{ attraction.city }}</p>
-                            <p>Szacowany czas: {{ attraction.time }} min</p>
-                            <p>Cena wstępu: {{ attraction.price }} zł</p>
-                            {% if del %}
-                                <form action="#" method="get">
-                                    <input type="hidden" value="{{ attraction.id }}" name="attraction_id">
-                                    <input style="height: 50px; width: 200px" type="submit" class="btn" value="Usun" name="del_attraction">
-                                    <input style="height: 50px; width: 200px" type="submit" class="btn" value="Ustaw jako pierwszy" name="change_first">
-                                </form>
-                            {% endif %}
-                        </div>
-                    </div>
-                    </div>
-            {% endfor %}
-        </div>
-         <div class = "map_render">
-             {% if map %}
-
-  	        {{map.html.render|safe}}
-  	        <script>
-    	            {{map.script.render|safe}}
-        	</script>
-	        {% endif %}
-                <div class="map_desc">
-                         <p>Czas: {{ time }} min</p>
-                         <p>Cena: {{ price }} zł</p>
-                            <div class="btns">
-                            {% if del %}
-                            <form action="#" method="get">
-                                <input type="hidden" value={{ time }} name="time">
-                                <input  type="submit" class="btn" value="Zakoncz" name="clicked">
-                            </form>
-                             </div>
-                    </div>
-                {% else %}
-                    </div>
-                                <form class="pdf"action="#" method="get">
-                                    <input  type="submit" class="btn" value="Pobierz PDF" name="pdf">
-                                </form>
-                    </div>
-                 {% endif %}
-         </div>
+    <div class="attractions">
+        {% for attraction in attraction_list %}
+            <div class="attract">
+                <h2>{{ attraction.name }}</h2>
+            <div class="attract_content">
+                <div class="attract_img">
+                    <img src="/{{attraction.image}}">
+                </div>
+                <div class="attract_desc">
+                <p>Miasto: {{ attraction.city }}</p>
+                <p>Szacowany czas: {{ attraction.time }} min</p>
+                <p>Cena wstępu: {{ attraction.price }} zł</p>
+                {% if del %}
+                    <form action="#" method="get">
+                        <input type="hidden" value="{{ attraction.id }}" name="attraction_id">
+                        <input style="height: 50px; width: 200px" type="submit" class="btn" value="Usun" name="del_attraction">
+                        <input style="height: 50px; width: 200px" type="submit" class="btn" value="Ustaw jako pierwszy" name="change_first">
+                        <input style="height: 50px; width: 200px" type="submit" class="btn" value="Ustaw jako ostatni" name="change_last">
+                    </form>
+                {% endif %}
+                </div>
+            </div>
+            </div>
+    {% endfor %}
     </div>
+        <div class = "map_render">
+    {% if map %}
+
+  	{{map.html.render|safe}}
+  	<script>
+    	{{map.script.render|safe}}
+  	</script>
+	{% endif %}
+    <div class="map_desc">
+    <p>Czas: {{ time }} min</p>
+    <p>Cena: {{ price }} zł</p>
+    <div class="btns">
+    {% if del %}
+    <form action="#" method="get">
+        <input type="hidden" value={{ time }} name="time">
+        <input  type="submit" class="btn" value="Zakoncz" name="clicked">
+    </form>
+        </div>
+        </div>
+    {% else %}
+</div>
+
+    </div>
+         <form class="pdf"action="#" method="get">
+            <input  type="submit" class="btn" value="Pobierz PDF" name="pdf">
+    </form>
+    {% endif %}
 {% endblock %}
