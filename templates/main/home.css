@@ -3,35 +3,18 @@
     padding: 0;
     box-sizing: border-box;
 }
-/*
------------->
-Ustawienie czcionki wszystkim elementom w sekcji body, kolor tła przy animacji
-<------------
- */
 body{
     background-color: floralwhite;
     font-family: 'Josefin Sans', sans-serif;
     font-style:italic;
     font-weight: 300;
 }
-/*
------------->
-Ustawienie kolejnych atrybutów "pojemnikowi na wszystkie elementy", 100% szerokści
-100% wysokości roboczej, pozycje relative, żeby nałożyć na to elementy z absolute, overflow
-chowa elementy jeśli są ponad skalę.
- <------------
- */
 .slideshow{
     width: 100%;
     height: 100vh;
     position: relative;
     overflow: hidden;
 }
-/*
------------->
-
-<------------
- */
 .slideshow-item{
     width: inherit;
     height: inherit;

@@ -3,29 +3,17 @@
     -moz-box-sizing: unset !important;
     -webkit-box-sizing: unset !important;
 }
-.title{
-    text-align: center;
-    display: block;
-}
-[id^=map]{
-    width: 90% !important;
-    height:600px !important;
-    border: 2px solid black;
-    margin: 80px auto 0 auto !important;
-}
-.loged{
-    padding-top: 5px;
-}
 body{
     line-height: unset;
-}
-img{
-    vertical-align: unset !important;
+    padding-bottom: 50px;
+    height: 100vh;
 }
 nav{
     position: unset;
 }
 .title{
+    text-align: center;
+    display: block;
     padding-top: 30px;
 }
 .content{
@@ -34,28 +22,26 @@ nav{
 .content_attractions{
     display: flex;
 }
-.attract_desc{
-    width: 60%;
+.attractions{
+    width: 50%;
     padding-left: 20px;
+    margin-bottom: 20px;
 }
-.attract_img{
-    width: 40%;
+.attract_content{
+    display: flex;
+}
+.attract_desc{
+    width: 100%;
+    padding-left: 20px;
 }
 .attract_img img{
     box-shadow: 5px 4px 5px 5px grey;
+    width: 240px;
+    height: 200px;
 }
-p, .btl  {
-    font-size: 20px;
-}
-.map_render{
-    width: 100%;
-}
-.content{
-    font-family: 'Josefin Sans', sans-serif;
-}
-.map_desc{
+.attract h2{
     text-align: center;
-    padding-top: 20px;
+    padding-bottom: 20px    ;
 }
 .btn{
     margin-top: 10px;
@@ -66,38 +52,29 @@ p, .btl  {
     height: 25px !important;
     width: 60px !important;
 }
-.attractions{
-    width: 45%;
-    padding-left: 20px;
-    margin-bottom: 20px;
-}
-.attract_content{
-    display: flex;
+.map_render{
+    width: 100%;
 }
 
-p, h1, input{
-    font-family: 'Josefin Sans', sans-serif !important;
-}
-.map{
-
-    width: 50%;
+.map_desc{
     text-align: center;
-}
-.desc{
-    width: 50%;
-}
-.attract h2{
-    text-align: center;
-    padding-bottom: 20px    ;
-}
-body{
-    padding-bottom: 50px;
-    height: 100vh;
-}
- footer{
-     bottom: auto;
-
+    padding-top: 20px;
 }
  .pdf{
      text-align: center;
  }
+[id^=map]{
+    width: 80% !important;
+    height:600px !important;
+    border: 2px solid black;
+    margin: 80px auto 0 auto !important;
+}
+ footer{
+     bottom: auto;
+}
+ p {
+    font-size: 20px;
+}
+ img{
+    vertical-align: unset !important;
+}

@@ -1,7 +1,5 @@
-
-.helptext{
-    display: block;
-    padding-top: 20px;
+body{
+    padding-bottom: 50px;
 }
 form{
     text-align: center;
@@ -12,7 +10,6 @@ form p{
     margin-top: 25px;
 }
 ul li, .helptext{
-
     list-style-type: none;
     font-size: 25px;
 }
@@ -22,12 +19,6 @@ button{
     font-size: 20px;
         font-family: 'Josefin Sans', sans-serif;
     margin-top: 30px;
-}
-body{
-    padding-bottom: 50px;
-}
-.errorlist{
-    display: none;
 }
 form p{
     padding-top: 5px;
@@ -42,8 +33,17 @@ input{
     font-size:20px ;
         font-family: 'Josefin Sans', sans-serif;
 }
+.helptext{
+    display: block;
+    padding-top: 20px;
+}
+.errorlist{
+    display: none;
+}
 .error{
     text-align: center;
-    font-size:40px ;
+    font-size:30px;
+    font-weight: bold;
     color: red;
+    margin-bottom: 15px;
 }

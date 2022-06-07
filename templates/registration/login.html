@@ -1,29 +1,18 @@
 {% extends 'main/base.html' %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}FindTravel | Logowanie{% endblock %}</title>
-    {% block style %}<link rel="stylesheet" href="/templates/main/login.css">{% endblock %}
-</head>
-<body>
+{% block title %}FindTravel | Logowanie{% endblock %}
+{% block style %}<link rel="stylesheet" href="/templates/registration/login.css">{% endblock %}
 {% block content %}
     <form method="post" class="form-group">
         {% csrf_token %}
         {{form.as_p}}
         <button type="submit" class="button">Zaloguj się</button>
     </form>
-        <p class="acc">Nie posiadasz konta?<a href="/register/">Zarejestruj się ...</a></p>
+    <p class="acc">Nie posiadasz konta?<a href="/register/">Zarejestruj się ...</a></p>
         {% if form.errors %}
-      {% for field in form %}
-
-           {% for error in field.errors %}
-               <p class="error">{{field.label}}: {{ error|escape }}</p>
-           {% endfor %}
-
-      {% endfor %}
-{% endif %}
+            {% for field in form %}
+               {% for error in field.errors %}
+                   <p class="error">{{field.label}}: {{ error|escape }}</p>
+               {% endfor %}
+            {% endfor %}
+        {% endif %}
 {% endblock %}
-
-</body>
-</html>
