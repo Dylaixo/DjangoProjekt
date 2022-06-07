@@ -7,9 +7,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,300&family=Square+Peg&display=swap" rel="stylesheet">
-{% block style  %}<link href="stylesheet" href="#">{% endblock %}
-    <title>{% block title %} Baza {% endblock %}</title>
-    {% block map %}   {{map.header.render|safe}}{% endblock %}
+        {% block style  %}<link href="stylesheet" href="#">{% endblock %}
+        <title>{% block title %} Baza {% endblock %}</title>
+        {% block map %}   {{map.header.render|safe}}{% endblock %}
 </head>
 <body>
 <nav>
@@ -18,11 +18,11 @@
     <a class="text" href="/">Strona główna</a>
     <a class="text" href="/attractions">Atrakcje</a>
     <a class="text" href="/about">Nasz zespół</a>
-    {% if user.is_authenticated %}
+            {% if user.is_authenticated %}
                 <a  href="/profile"><img class="loged" src="/templates/main/img/profile.png"></a>
                 <a class="text" href="/logout/">Wyloguj sie</a>
             {% else %}
-            <a class="text" href="/login/">Zaloguj sie</a>
+                <a class="text" href="/login/">Zaloguj sie</a>
             {% endif %}
     <a href="#"></a>
     <a class="text" id="cart" href="/cart"><img class="map" src="/templates/main/img/map2.png" ><span>Plan</span></a>

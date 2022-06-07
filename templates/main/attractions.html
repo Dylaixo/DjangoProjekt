@@ -1,26 +1,26 @@
 {% extends 'main/base.html' %}
 
-    {% block style %}<link rel="stylesheet" href="/templates/main/attractions.css">{% endblock %}
+{% block style %}<link rel="stylesheet" href="/templates/main/attractions.css">{% endblock %}
 {% block title %}FindTravel | Wybierz Atrakcje{% endblock %}
 {% block content %}
-       <div class="header">
-    <h1 class="header-title">Wybierz atrakcje ... </h1>
-    <div class="filtr">
-        <h2>Filtry:</h2><br>
-        <button id="all">Wszystkie</button>
-        <button id="Sakralne">Sakralne</button>
-        <button id="Pomniki">Pomniki</button>
-        <button id="Muzea">Muzea</button>
-        <button id="Zabytki">Zabytki</button>
+    <div class="header">
+        <h1 class="header-title">Wybierz atrakcje ... </h1>
+        <div class="filtr">
+            <h2>Filtry:</h2><br>
+            <button id="all">Wszystkie</button>
+            <button id="Sakralne">Sakralne</button>
+            <button id="Pomniki">Pomniki</button>
+            <button id="Muzea">Muzea</button>
+            <button id="Zabytki">Zabytki</button>
+        </div>
     </div>
-</div>
     <div class="container">
 {% for attraction in attraction_list %}
     {% if attraction.city.name == city  %}
 
     <div class="{{ attraction.category }}">
         <a class="attract" href="single_attraction/{{attraction.id}}">
-        <img src="/{{attraction.image}}">
+            <img src="/{{attraction.image}}">
             <span>{{ attraction.name }}</span>
         </a>
     </div>
@@ -28,18 +28,18 @@
     {% endif%}
 {% endfor %}
     </div>
-    <h1 class="header-title">lub wybierz gotową trasę!</h1>
-    <div class="default_content">
-    {% for cart in default_list %}
+        <h1 class="header-title">lub wybierz gotową trasę!</h1>
+        <div class="default_content">
+        {% for cart in default_list %}
 
-        <a class = "default"href="/cart/{{ cart.id }}">
-            {% if cart.name is not None %}
-            <h1 class="default_name">{{ cart.name }}</h1>
-            {% endif %}
-            <p class="default_attractions">{% for attraction in cart.attractions.all %} {{ attraction.name }}, {% endfor %}</p>
-        </a>
+            <a class = "default"href="/cart/{{ cart.id }}">
+                {% if cart.name is not None %}
+                <h1 class="default_name">{{ cart.name }}</h1>
+                {% endif %}
+                <p class="default_attractions">{% for attraction in cart.attractions.all %} {{ attraction.name }}, {% endfor %}</p>
+            </a>
 
-    {% endfor %}
-    </div>
+        {% endfor %}
+        </div>
         <script src="/templates/main/filtr.js/"></script>
 {% endblock %}
