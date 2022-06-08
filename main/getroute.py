@@ -34,15 +34,12 @@ def shortest_path(attracions_list):
     for index, attracion in enumerate(attracions_list):
         tmp = f'"address":"{index + 1}","lat":"{attracion.lat}","lng":"{attracion.long}"'
         locations_tmp.append("{"+tmp+"}")
-    print(locations_tmp)
     locations = {"locations": "[" + ','.join(locations_tmp) + "]"}
-    print(locations)
     url = 'https://api.routexl.com/tour'
     username = 'C2g'
     password = 'pilkoryj1'
     g = requests.post(url, auth=(username, password), data=locations)
     data = json.loads(g.text)
-    print(g)
     permutation = []
     tmp_distance = []
     distance = []

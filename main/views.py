@@ -91,10 +91,9 @@ def cart(request):
         cart.attractions.remove(tmp_attraction)
     attractions_list = list(cart.attractions.all())
     if attractions_list:
-        try:
-            first_attraction = cart.first_attraction
-            last_attraction = cart.last_attraction
-        except:
+        first_attraction = cart.first_attraction
+        last_attraction = cart.last_attraction
+        if first_attraction is None or last_attraction is None:
             first_attraction = attractions_list[0]
             if len(attractions_list) == 1:
                 last_attraction = attractions_list[0]
