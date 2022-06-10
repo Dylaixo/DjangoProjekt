@@ -1,18 +1,22 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-from django.urls import Resolver404
-
-from .models import Category, Cart, Attractions, City
+from .models import Cart, Attractions, City
 from django.contrib.auth.decorators import login_required
 from . import getroute
-import folium
-from django.http import HttpResponseNotFound, FileResponse, HttpResponse, Http404
+from django.http import FileResponse,  Http404
 from django.db.models import Sum
-import io
-from reportlab.pdfgen import canvas
 from .pdf import pdfbuffer
-from django.template import RequestContext
 from django.core.exceptions import PermissionDenied
+
+
+def first_last_when_clicked(request, last_attraction, first_attraction, attractions_list):
+    tmp_attraction = Attractions.objects.get(id=request.GET.get('attraction_id'))
+    if last_attraction == first_attraction:
+        for attraction in attractions_list:
+            if attraction != last_attraction:
+                tmp_attraction = attraction
+                break
+    return tmp_attraction
 
 
 def set_list_first_and_last_attractions(attractions_list, first, last):
@@ -103,29 +107,13 @@ def cart(request):
                 last_attraction = attractions_list[0]
             else:
                 last_attraction = attractions_list[1]
-            cart.first_attraction = first_attraction
-            cart.last_attraction = last_attraction
-            cart.save()
         if request.GET.get('change_first'):
-            first_attraction = Attractions.objects.get(id=request.GET.get('attraction_id'))
-            if last_attraction == first_attraction:
-                for attraction in attractions_list:
-                    if attraction != last_attraction:
-                        last_attraction = attraction
-                        cart.last_attraction = last_attraction
-                        break
-            cart.first_attraction = first_attraction
-            cart.save()
+            first_attraction = first_last_when_clicked(request, last_attraction, first_attraction, attractions_list)
         if request.GET.get('change_last'):
-            last_attraction = Attractions.objects.get(id=request.GET.get('attraction_id'))
-            if first_attraction == last_attraction:
-                for attraction in attractions_list:
-                    if attraction != last_attraction:
-                        first_attraction = attraction
-                        cart.first_attraction = first_attraction
-                        break
-            cart.last_attraction = last_attraction
-            cart.save()
+            last_attraction = first_last_when_clicked(request, last_attraction, first_attraction, attractions_list)
+        cart.first_attraction = first_attraction
+        cart.last_attraction = last_attraction
+        cart.save()
         attractions_list = set_list_first_and_last_attractions(attractions_list, first_attraction, last_attraction)
         permutation, distance = getroute.shortest_path(attractions_list)
         if request.GET.get('clicked'):
