@@ -68,7 +68,10 @@ def attractions(request, city):
 
 
 def single_attraction(request, id):
-    attraction = Attractions.objects.get(id=id)
+    try:
+        attraction = Attractions.objects.filter(id=id)
+    except Attractions.DoesNotExist:
+        raise Http404
     context = {"attraction": attraction}
     return render(request, "main/single_attraction.html", context)
 
@@ -77,7 +80,10 @@ def single_attraction(request, id):
 def add_attraction(request, id):
     user = User.objects.get(id=request.user.id)
     queryset = Cart.objects.filter(user=user, completed=False)
-    attraction = Attractions.objects.filter(id=id)
+    try:
+        attraction = Attractions.objects.filter(id=id)
+    except Attractions.DoesNotExist:
+        raise Http404
     try:
         cart = Cart.objects.get(user=user, completed=False)
     except Cart.DoesNotExist:
