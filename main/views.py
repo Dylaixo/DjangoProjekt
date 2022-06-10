@@ -6,7 +6,7 @@ from .models import Category, Cart, Attractions, City
 from django.contrib.auth.decorators import login_required
 from . import getroute
 import folium
-from django.http import HttpResponseNotFound, FileResponse, HttpResponse
+from django.http import HttpResponseNotFound, FileResponse, HttpResponse, Http404
 from django.db.models import Sum
 import io
 from reportlab.pdfgen import canvas
@@ -145,7 +145,10 @@ def cart(request):
 
 
 def cart_show(request, id):
-    cart = Cart.objects.get(id=id)
+    try:
+        cart = Cart.objects.get(id=id)
+    except Cart.DoesNotExist:
+        raise Http404
     if request.GET.get('pdf'):
         buffer = pdfbuffer(cart)
         return FileResponse(buffer, as_attachment=False, filename='hello.pdf')
