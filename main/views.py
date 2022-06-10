@@ -1,14 +1,18 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from django.urls import Resolver404
+
 from .models import Category, Cart, Attractions, City
 from django.contrib.auth.decorators import login_required
 from . import getroute
 import folium
-from django.http import HttpResponseNotFound, FileResponse
+from django.http import HttpResponseNotFound, FileResponse, HttpResponse
 from django.db.models import Sum
 import io
 from reportlab.pdfgen import canvas
 from .pdf import pdfbuffer
+from django.template import RequestContext
+from django.core.exceptions import PermissionDenied
 
 
 def set_list_first_and_last_attractions(attractions_list, first, last):
@@ -146,7 +150,7 @@ def cart_show(request, id):
         buffer = pdfbuffer(cart)
         return FileResponse(buffer, as_attachment=False, filename='hello.pdf')
     if request.user != cart.user and cart.user.username != "default":
-        return HttpResponseNotFound("You dont have permissions")
+        raise PermissionDenied()
     attractions_list = list(cart.attractions.all())
     first_attraction = cart.first_attraction
     last_attraction = cart.last_attraction
@@ -176,3 +180,20 @@ def profile(request):
     except Cart.DoesNotExist:
         attractions_list = {}
     return render(request, "main/profile.html", {"attraction_list": attractions_list, "cart_list": cart_list})
+
+
+def custom_page_not_found_view(request, exception=None):
+    return render(request, "main/error.html", {"error": "404: Strona nie odnaleziona"}, status=404)
+
+
+def custom_error_view(request, exception=None):
+    return render(request, "main/error.html", {"error": "500: Błąd views"})
+
+
+def custom_permission_denied_view(request, exception=None):
+    return render(request, "main/error.html", {"error": "403: Brak permisji"})
+
+
+def custom_bad_request_view(request, exception=None):
+    return render(request, "main/error.html", {"error": "400: Zły request"})
+
