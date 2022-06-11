@@ -69,7 +69,7 @@ def attractions(request, city):
 
 def single_attraction(request, id):
     try:
-        attraction = Attractions.objects.filter(id=id)
+        attraction = Attractions.objects.get(id=id)
     except Attractions.DoesNotExist:
         raise Http404
     context = {"attraction": attraction}
