@@ -1,5 +1,5 @@
 {% extends 'main/base.html' %}
-{% block style %}<link rel="stylesheet" href="/templates/main/single_attraction.css">{% endblock %}
+{% block style %}<link rel="stylesheet" href="/static/main/single_attraction.css">{% endblock %}
 {% block title %}FindTravel | {{ attraction.name }}{% endblock %}
 {% block content %}
 
@@ -18,7 +18,7 @@
            </div>
            <a class="add"href="/attractions/single_attraction/{{ attraction.id }}/add">
                 <p>Dodaj do planu</p>
-                <img src="/templates/main/img/map2.png">
+                <img src="/static/main/img/map2.png">
            </a>
         </div>
     <div class="back">

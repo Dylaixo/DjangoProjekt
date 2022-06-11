@@ -1,0 +1,80 @@
+*{
+    box-sizing: unset !important;
+    -moz-box-sizing: unset !important;
+    -webkit-box-sizing: unset !important;
+}
+body{
+    line-height: unset;
+    padding-bottom: 50px;
+    height: 100vh;
+}
+nav{
+    position: unset;
+}
+.title{
+    text-align: center;
+    display: block;
+    padding-top: 30px;
+}
+.content{
+    margin-bottom: 50px;
+}
+.content_attractions{
+    display: flex;
+}
+.attractions{
+    width: 50%;
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+.attract_content{
+    display: flex;
+}
+.attract_desc{
+    width: 100%;
+    padding-left: 20px;
+}
+.attract_img img{
+    box-shadow: 5px 4px 5px 5px grey;
+    width: 240px;
+    height: 200px;
+}
+.attract h2{
+    text-align: center;
+    padding-bottom: 20px    ;
+}
+.btn{
+    margin-top: 10px;
+    height: 25px !important;
+    width: 120px !important;
+}
+.del{
+    height: 25px !important;
+    width: 60px !important;
+}
+.map_render{
+    width: 100%;
+}
+
+.map_desc{
+    text-align: center;
+    padding-top: 20px;
+}
+ .pdf{
+     text-align: center;
+ }
+[id^=map]{
+    width: 80% !important;
+    height:600px !important;
+    border: 2px solid black;
+    margin: 80px auto 0 auto !important;
+}
+ footer{
+     bottom: auto;
+}
+ p {
+    font-size: 20px;
+}
+ img{
+    vertical-align: unset !important;
+}
