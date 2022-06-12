@@ -69,7 +69,7 @@ def attractions(request, city):
 
 def single_attraction(request, id):
     try:
-        attraction = Attractions.objects.filter(id=id)
+        attraction = Attractions.objects.get(id=id)
     except Attractions.DoesNotExist:
         raise Http404
     context = {"attraction": attraction}
@@ -143,15 +143,16 @@ def cart_show(request, id):
         cart = Cart.objects.get(id=id)
     except Cart.DoesNotExist:
         raise Http404
-    if request.GET.get('pdf'):
-        buffer = pdfbuffer(cart)
-        return FileResponse(buffer, as_attachment=False, filename='hello.pdf')
+
     if request.user != cart.user and cart.user.username != "default":
         raise PermissionDenied()
     attractions_list = list(cart.attractions.all())
     first_attraction = cart.first_attraction
     last_attraction = cart.last_attraction
     attractions_list = set_list_first_and_last_attractions(attractions_list, first_attraction, last_attraction)
+    if request.GET.get('pdf'):
+        buffer = pdfbuffer(attractions_list)
+        return FileResponse(buffer, as_attachment=False, filename='hello.pdf')
     price = cart.attractions.all().aggregate(Sum('price'))['price__sum']
     distance = [int(i) for i in cart.distance.split(';')]
     figure = getroute.generate_map(attractions_list, distance)
