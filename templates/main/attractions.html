@@ -20,7 +20,7 @@
 
     <div class="{{ attraction.category }}">
         <a class="attract" href="single_attraction/{{attraction.id}}">
-            <img src="/{{attraction.image}}">
+            <img src="http://91.145.130.184/media/{{attraction.image}}">
             <span>{{ attraction.name }}</span>
         </a>
     </div>
@@ -41,5 +41,5 @@
 
         {% endfor %}
         </div>
-        <script src="/static/main/filtr.js/"></script>
+        <script src="/static/main/filtr.js"></script>
 {% endblock %}

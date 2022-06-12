@@ -11,7 +11,8 @@ class Category(models.Model):
 
 class City(models.Model):
     name = models.CharField(max_length=200)
-    image = models.ImageField(upload_to=f'attractions_images/', blank=True)
+    image = models.ImageField(upload_to='citys', blank=True)
+#    image = models.ImageField(upload_to='media', blank=True)
 
     def __str__(self):
         return self.name
@@ -21,7 +22,8 @@ class Attractions(models.Model):
     name = models.CharField(max_length=200)
     time = models.PositiveSmallIntegerField(help_text="czas podany w minutach")
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to=f'attractions_images/', blank=True)
+#    image = models.ImageField(upload_to, blank=True)
+    image = models.ImageField(upload_to='attractions', blank = True)
     price = models.PositiveIntegerField(default=0)
     desc = models.TextField()
     city = models.ForeignKey(City, on_delete=models.CASCADE)
