@@ -181,17 +181,17 @@ def profile(request):
 
 
 def custom_page_not_found_view(request, exception=None):
-    return render(request, "main/error.html", {"error": "404: Strona nie odnaleziona"}, status=404)
+    return render(request, "main/error.html", {"error": "404: Strona nie odnaleziona. Sprawdź czy link jest poprawny."}, status=404)
 
 
 def custom_error_view(request, exception=None):
-    return render(request, "main/error.html", {"error": "500: Błąd views"})
+    return render(request, "main/error.html", {"error": "500: Błąd strony. Przepraszamy za problemy."})
 
 
 def custom_permission_denied_view(request, exception=None):
-    return render(request, "main/error.html", {"error": "403: Brak permisji"})
+    return render(request, "main/error.html", {"error": "403: Brak permisji. Nie masz dostępu do zawartości tej strony."})
 
 
 def custom_bad_request_view(request, exception=None):
-    return render(request, "main/error.html", {"error": "400: Zły request"})
+    return render(request, "main/error.html", {"error": "400: Zły request. Błąd w zapytaniu."})
 
