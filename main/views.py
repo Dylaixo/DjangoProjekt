@@ -143,15 +143,16 @@ def cart_show(request, id):
         cart = Cart.objects.get(id=id)
     except Cart.DoesNotExist:
         raise Http404
-    if request.GET.get('pdf'):
-        buffer = pdfbuffer(cart)
-        return FileResponse(buffer, as_attachment=False, filename='hello.pdf')
+
     if request.user != cart.user and cart.user.username != "default":
         raise PermissionDenied()
     attractions_list = list(cart.attractions.all())
     first_attraction = cart.first_attraction
     last_attraction = cart.last_attraction
     attractions_list = set_list_first_and_last_attractions(attractions_list, first_attraction, last_attraction)
+    if request.GET.get('pdf'):
+        buffer = pdfbuffer(attractions_list)
+        return FileResponse(buffer, as_attachment=False, filename='hello.pdf')
     price = cart.attractions.all().aggregate(Sum('price'))['price__sum']
     distance = [int(i) for i in cart.distance.split(';')]
     figure = getroute.generate_map(attractions_list, distance)
@@ -180,17 +181,17 @@ def profile(request):
 
 
 def custom_page_not_found_view(request, exception=None):
-    return render(request, "main/error.html", {"error": "404: Strona nie odnaleziona"}, status=404)
+    return render(request, "main/error.html", {"error": "404: Strona nie odnaleziona. Sprawdź czy link jest poprawny."}, status=404)
 
 
 def custom_error_view(request, exception=None):
-    return render(request, "main/error.html", {"error": "500: Błąd views"})
+    return render(request, "main/error.html", {"error": "500: Błąd strony. Przepraszamy za problemy."})
 
 
 def custom_permission_denied_view(request, exception=None):
-    return render(request, "main/error.html", {"error": "403: Brak permisji"})
+    return render(request, "main/error.html", {"error": "403: Brak permisji. Nie masz dostępu do zawartości tej strony."})
 
 
 def custom_bad_request_view(request, exception=None):
-    return render(request, "main/error.html", {"error": "400: Zły request"})
+    return render(request, "main/error.html", {"error": "400: Zły request. Błąd w zapytaniu."})
 
