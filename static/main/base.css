@@ -1,0 +1,67 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+nav a{
+    height: 40px;
+    text-decoration: none;
+    color:black;
+    font-size: 48px;
+}
+nav .text:hover{
+    padding: 0 5px 0 5px;
+    border-radius: 10px;
+    transition: 0.7s;
+    font-size: 50px;
+    color: black !important;
+    text-decoration: underline;
+}
+nav{
+    top:0;
+    position: sticky;
+    display: flex !important;
+    justify-content: space-around;
+    padding: 20px 0 10px 0;
+    border-bottom: 1.5px black solid;
+    background-color:floralwhite;
+    font-family: 'Square Peg', cursive !important;
+}
+.logo{
+    padding: 0;
+    width: 60px;
+    height: 60px;
+}
+.loged {
+    width: 50px;
+    height: 50px;
+    padding-top: 0;
+}
+.map {
+    padding-top: 10px;
+    width: 40px;
+    height: 40px;
+}
+body{
+    min-height: 100vh;
+    position: relative;
+    font-family: 'Josefin Sans', sans-serif !important;
+}
+#cart{
+    display: flex;
+}
+#cart span {
+    padding-left: 10px;
+}
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height:50px;
+    background-color:floralwhite;
+}
+footer p{
+    margin-top: 15px;
+    font-size: 20px;
+    font-family: 'Square Peg', cursive !important;
+    text-align: center;
+}

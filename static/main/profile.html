@@ -1,0 +1,25 @@
+{% extends "main/base.html" %}
+{% block title %}FindTravel | Profil{% endblock title %}
+{% block style %}<link rel="stylesheet" href="/static/main/profile.css">{% endblock %}
+{% block content %}
+
+    <h1>Profil użytkownika: {{user.username}}</h1>
+    <h2>Imie: {{user.first_name}}</h2>
+    <h2>Nazwisko: {{user.last_name}}</h2>
+    <h2>Aktualny plan:</h2>
+    <a href="/cart">
+    <h3>{{ attraction_list.0.city }}</h3>
+    {% for attraction in attraction_list %}
+        <p>{{ attraction.name }} ({{ attraction.time }} min, {{ attraction.price}} zł)</p>
+    {% endfor %}
+    </a>
+    <h2>Poprzednie plany (Pobierz PDF): </h2>
+    {% for cart in cart_list %}
+        <a href="/cart/{{ cart.id }}">
+            <h3>{{ forloop.counter }}. {{ cart.attractions.all.0.city }}</h3>
+            {% for attraction in cart.attractions.all %}
+            <p>{{ attraction.name }} ({{ attraction.time }} min, {{ attraction.price}} zł)</p>
+            {% endfor %}
+        </a>
+    {% endfor %}    
+{% endblock content %}

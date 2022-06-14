@@ -1,0 +1,17 @@
+{% extends 'main/base.html' %}
+{% block title %}FindTravel | Koszyk{% endblock %}
+{% block style %}<link rel="stylesheet" href="/static/main/cart_empty.css">{% endblock %}
+{% block content %}
+    <h1>Wybierz trasy stworzone przez nasz zespół lub <a class="create" href="/attractions">stwórz własną trasę!</a></h1>
+    <div class="default">
+    {% for cart in default_list %}
+
+        <div class="default">
+        <a href="/cart/{{ cart.id }}">
+            <h2>{{ cart.name }}</h2>
+            <p>{% for attraction in cart.attractions.all %} {{ attraction.name }}, {% endfor %}</p>
+        </a>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
