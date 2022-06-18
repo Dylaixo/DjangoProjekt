@@ -6,16 +6,9 @@ services:
       MYENV: venv
     volumes:
       - .:/code
-    image: theripson/djangoproject:web
-  web_migrate:
-    extends:
-      service: web
-    command: python manage.py migrate
-    image: theripson/djangoproject:migrate
-  web_run:
-    extends:
-      service: web
-    command: python manage.py runserver 0.0.0.0:8000
+    command: bash -c "
+        python manage.py migrate
+        && python manage.py runserver 0.0.0.0:8000"
     ports:
       - "8000:8000"
-    image: theripson/djangoproject:run
+    image: theripson/djangoproject:web
