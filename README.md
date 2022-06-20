@@ -1,4 +1,4 @@
-h2>Instrukcja włączenia projektu</h2>
+<h2>Instrukcja włączenia projektu</h2>
 <ol>
   <li>pierwszy</li>
   <li>pierwszy</li>
@@ -20,6 +20,8 @@ h2>Instrukcja włączenia projektu</h2>
 <img src="https://user-images.githubusercontent.com/100869542/174655743-d1206cd0-e7e0-474c-8378-9cf5cf7ec6b0.png"></img>
 <p align="justify">Potencjalny turysta na początku musi wybrać miasto do którego chciałby się wybrać.</p><br>
 <img src="https://user-images.githubusercontent.com/100869542/174656097-a2013ca2-b877-4b2a-9f90-251c223cabd8.png"></img>
-<p>Po kliknięciu automatycznie zostanie przeniesiony do strony zawierającej wszystkie, możliwe atrkajce w wybranym mieście. Każda atrakcja ma swoje wspołrzędne</p>
+<p>Po kliknięciu automatycznie zostanie przeniesiony do strony zawierającej wszystkie, możliwe atrakcje w wybranym mieście</p>
 <img src="https://user-images.githubusercontent.com/100869542/174656425-d77bce73-7a7f-434c-9579-26fde9e369c4.png"></img>
+<p>Każda atrakcja ma swoje wspołrzędne, czas potrzebny na jej zwiedzanie, ewentualną cenę biletu wstępu i inne parametr</p>
+<img src="https://user-images.githubusercontent.com/100869542/174657020-f815702d-1681-482d-a775-c2577aa2f049.png"></img>
 
