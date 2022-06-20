@@ -1,8 +1,6 @@
 import requests
 import polyline
 import folium
-from python_tsp.exact import solve_tsp_dynamic_programming
-import numpy as np
 import json
 
 
@@ -49,30 +47,6 @@ def shortest_path(attracions_list):
         dist = get_route(attracions_list[permutation[i]].long, attracions_list[permutation[i]].lat,
                          attracions_list[permutation[i-1]].long, attracions_list[permutation[i-1]].lat)
         distance.append(round(dist['duration']/60))
-    return permutation, distance
-
-def shortest_path2(attractions_list):
-    y = len(attractions_list)
-    routes = np.zeros((y, y))
-    for i in range(0, y):
-        for j in range(i, y):
-            route = get_route(attractions_list[j].long, attractions_list[j].lat,
-                              attractions_list[i].long, attractions_list[i].lat)
-            routes[j][i] = routes[i][j] = route['duration']
-    distance = []
-    permutation = [0]
-    routes_visited = np.zeros(y)
-    routes_visited[0] = 1
-    start = 0
-    for i in range(0, y - 1):
-        min_dist = (99999999, 0)
-        for j in range(0, y):
-            if routes_visited[j] == 0 and min_dist[0] > routes[start][j]:
-                min_dist = (routes[start][j], j)
-        permutation.append(min_dist[1])
-        distance.append(round(min_dist[0]/60))
-        routes_visited[min_dist[1]] = 1
-        start = min_dist[1]
     return permutation, distance
 
 
