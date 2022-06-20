@@ -114,10 +114,21 @@ def cart(request):
         cart = Cart.objects.get(user=request.user, completed=False)
     except Cart.DoesNotExist:
         return render(request, "main/cart_empty.html", {"default_list": generate_default_carts()})
+    attractions_list = list(cart.attractions.all())
     if request.GET.get('del_attraction'):
         tmp_attraction = Attractions.objects.get(id=request.GET.get('attraction_id'))
+        if tmp_attraction == cart.last_attraction:
+            for attraction in attractions_list:
+                if attraction is not cart.last_attraction and attraction is not cart.first_attraction:
+                    cart.last_attraction = attraction
+        elif tmp_attraction == cart.first_attraction:
+            for attraction in attractions_list:
+                if attraction is not cart.last_attraction and attraction is not cart.first_attraction:
+                    cart.first_attraction = attraction
         cart.attractions.remove(tmp_attraction)
-    attractions_list = list(cart.attractions.all())
+        attractions_list = list(cart.attractions.all())
+    if len(attractions_list) <= 1:
+        return render(request, "main/cart_empty.html", {"default_list": generate_default_carts()})
     if attractions_list:
         first_attraction, last_attraction = set_fist_and_last_attraction(attractions_list, cart)
         if request.GET.get('change_first'):
