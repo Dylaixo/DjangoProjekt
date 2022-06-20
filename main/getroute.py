@@ -1,8 +1,6 @@
 import requests
 import polyline
 import folium
-from python_tsp.exact import solve_tsp_dynamic_programming
-import numpy as np
 import json
 
 
