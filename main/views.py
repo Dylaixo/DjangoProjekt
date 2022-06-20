@@ -9,14 +9,31 @@ from .pdf import pdfbuffer
 from django.core.exceptions import PermissionDenied
 
 
-def first_last_when_clicked(request, last_attraction, first_attraction, attractions_list):
-    tmp_attraction = Attractions.objects.get(id=request.GET.get('attraction_id'))
+def set_fist_and_last_attraction(attractions_list, cart):
+    first_attraction = cart.first_attraction
+    last_attraction = cart.last_attraction
+    if first_attraction is None:
+        first_attraction = attractions_list[0]
+    if last_attraction is None:
+        last_attraction = attractions_list[len(attractions_list)-1]
+    return first_attraction, last_attraction
+
+
+
+
+def first_last_when_clicked(request, last_attraction, first_attraction, attractions_list, first_or_last):
+    if first_or_last == "first":
+        first_attraction = Attractions.objects.get(id=request.GET.get('attraction_id'))
+    elif first_or_last == "last":
+        last_attraction = Attractions.objects.get(id=request.GET.get('attraction_id'))
     if last_attraction == first_attraction:
         for attraction in attractions_list:
-            if attraction != last_attraction:
-                tmp_attraction = attraction
-                break
-    return tmp_attraction
+            if attraction is not last_attraction:
+                if first_or_last == "first":
+                    last_attraction = attraction
+                elif first_or_last == "last":
+                    first_attraction = attraction
+    return first_attraction, last_attraction
 
 
 def set_list_first_and_last_attractions(attractions_list, first, last):
@@ -105,23 +122,16 @@ def cart(request):
         cart.attractions.remove(tmp_attraction)
     attractions_list = list(cart.attractions.all())
     if attractions_list:
-        first_attraction = cart.first_attraction
-        last_attraction = cart.last_attraction
-        if first_attraction is None or last_attraction is None:
-            first_attraction = attractions_list[0]
-            if len(attractions_list) == 1:
-                last_attraction = attractions_list[0]
-            else:
-                last_attraction = attractions_list[1]
+        first_attraction, last_attraction = set_fist_and_last_attraction(attractions_list, cart)
         if request.GET.get('change_first'):
-            first_attraction = first_last_when_clicked(request, last_attraction, first_attraction, attractions_list)
+            first_attraction, last_attraction = first_last_when_clicked(request, last_attraction, first_attraction, attractions_list, "first")
         if request.GET.get('change_last'):
-            last_attraction = first_last_when_clicked(request, last_attraction, first_attraction, attractions_list)
+            first_attraction, last_attraction = first_last_when_clicked(request, last_attraction, first_attraction, attractions_list, "last")
+        attractions_list = set_list_first_and_last_attractions(attractions_list, first_attraction, last_attraction)
+        permutation, distance = getroute.shortest_path(attractions_list)
         cart.first_attraction = first_attraction
         cart.last_attraction = last_attraction
         cart.save()
-        attractions_list = set_list_first_and_last_attractions(attractions_list, first_attraction, last_attraction)
-        permutation, distance = getroute.shortest_path(attractions_list)
         if request.GET.get('clicked'):
             cart.distance = ';'.join(str(x) for x in distance)
             cart.completed = True
