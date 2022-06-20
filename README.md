@@ -24,6 +24,6 @@ h2>Instrukcja włączenia projektu</h2>
 <h1 align="center">FindTravel<br></h1>
 
 <p align="center">Strona stworzona do tworzenia tras zwiedzania różnych atrakcji rozmieszczonych w całej Polsce!</p>
-<img src="https://user-images.githubusercontent.com/100869542/174654936-4588d98c-7c57-44dc-9637-10569ba72651.png"></img>
+<img width="80%" height="500px" src="https://user-images.githubusercontent.com/100869542/174654936-4588d98c-7c57-44dc-9637-10569ba72651.png"></img>
 <p align="justify">Potencjalny turysta na początku musi wybrać miasto do którego chciałby się wybrać, po kliknięciu automatycznie zostanie przeniesiony do strony zawierającej wszystkie, możliwe atrkajce w wybranym mieście. Każda atrakcja ma swoje wspołrzędne</p>
 
