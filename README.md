@@ -1,13 +1,23 @@
 <h2>Instrukcja włączenia projektu</h2>
+<p>W terminalu należy przejść do folderu zawierającego projekt</p>
 <ul>
-  <li>pierwszy</li>
+  <li>Odpalenie zdokeryzowanej strony typu develop</li>
     <ol>
-    <li>xdxdxd</li>
+      <li>W terminalu należy wpisać komendę: "docker pull theripson/djangoproject:web".<br>
+      Po wpisaniu pobierane są wszystkie pliki potrzebne do włączenia strony.
+      </li>
+      <li>Następnie wpisanie komendy: "docker-compose.exe up".<br>
+      Należy wpisać w przeglądarce adres: 127.0.0.1:8000</li>
+      <li>Należy stworzyć konto administratora komendą: "python .\manage.py createsuperuser". Aby wejść w panel administratora na stronie adres przeglądarki powinien wyglądać następująco: "127.0.0.1:8000/admin". </li>
+      <li>Należy wykonać migracje komendą:"python .\manage.py makemigrations", a następnie "python .\manage.py migrate".</li>
     </ol>
-  <li>pierwszy</li>
+  <li>Odpalenie zdokeryzowanej strony typu deploy(w przypadku systemu Linux)</li>
     <ol>
-    <li>xdxdxd</li>
-     </ol>
+      <li>W terminalu należy wpisać komendę: "docker pull theripson/djangoproject:deploy"</li>
+      <li>Następnie wpisanie komendy: "docker-compose.exe up".</li>
+      <li>Serwer działa na IP Dockera. </li>
+    </ol>
+  <li>Wpisanie w przeglądarkę IP: "http://91.145.130.184"</li>
 </ul>
 <h2>Wykorzystane biblioteki</h2>
 <ol>
