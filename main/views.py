@@ -19,8 +19,6 @@ def set_fist_and_last_attraction(attractions_list, cart):
     return first_attraction, last_attraction
 
 
-
-
 def first_last_when_clicked(request, last_attraction, first_attraction, attractions_list, first_or_last):
     if first_or_last == "first":
         first_attraction = Attractions.objects.get(id=request.GET.get('attraction_id'))
@@ -45,7 +43,6 @@ def set_list_first_and_last_attractions(attractions_list, first, last):
             attractions_list.remove(attraction)
             attractions_list.insert(len(attractions_list), attraction)
     return attractions_list
-
 
 
 def generate_default_carts(city=None):
