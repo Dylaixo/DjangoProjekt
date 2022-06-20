@@ -25,6 +25,6 @@ urlpatterns = [
 ]
 
 handler404 = 'main.views.custom_page_not_found_view'
-handler500 = 'main.views.custom_error_view'
+#handler500 = 'main.views.custom_error_view'
 handler403 = 'main.views.custom_permission_denied_view'
 handler400 = 'main.views.custom_bad_request_view'
