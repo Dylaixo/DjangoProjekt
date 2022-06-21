@@ -174,14 +174,14 @@ def cart_show(request, id):
     for i in permutation:
         tmp_list.append(attractions_list[i])
     if request.GET.get('pdf'):
-        buffer = pdfbuffer(attractions_list)
+        buffer = pdfbuffer(tmp_list)
         return FileResponse(buffer, as_attachment=False, filename='hello.pdf')
     price = cart.attractions.all().aggregate(Sum('price'))['price__sum']
     distance = [int(i) for i in cart.distance.split(';')]
-    figure = getroute.generate_map(attractions_list, distance)
-    time = sum(distance) + sum(attraction.time for attraction in attractions_list)
+    figure = getroute.generate_map(tmp_list, distance)
+    time = sum(distance) + sum(attraction.time for attraction in tmp_list)
     return render(request, "main/cart.html",
-                  {"attraction_list": attractions_list, "map": figure, "time": time,
+                  {"attraction_list": tmp_list, "map": figure, "time": time,
                    "del": False, "price": price})
 
 
