@@ -144,6 +144,7 @@ def cart(request):
             cart.distance = ';'.join(str(x) for x in distance)
             cart.completed = True
             cart.save()
+            return redirect(f"/cart/{cart.id}")
         tmp_list = []
         for i in permutation:
             tmp_list.append(attractions_list[i])
@@ -168,6 +169,10 @@ def cart_show(request, id):
     first_attraction = cart.first_attraction
     last_attraction = cart.last_attraction
     attractions_list = set_list_first_and_last_attractions(attractions_list, first_attraction, last_attraction)
+    permutation, distance = getroute.shortest_path(attractions_list)
+    tmp_list = []
+    for i in permutation:
+        tmp_list.append(attractions_list[i])
     if request.GET.get('pdf'):
         buffer = pdfbuffer(attractions_list)
         return FileResponse(buffer, as_attachment=False, filename='hello.pdf')
